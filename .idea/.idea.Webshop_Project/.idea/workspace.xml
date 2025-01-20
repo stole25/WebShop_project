@@ -12,10 +12,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fbcc1cd1-c860-4057-b338-8b6e8e9cac4d" name="Changes" comment="">
+    <list default="true" id="fbcc1cd1-c860-4057-b338-8b6e8e9cac4d" name="Changes" comment="s">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Webshop_Project/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Webshop_Project/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Webshop_Backend/Properties/launchSettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/Webshop_Backend/Properties/launchSettings.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Webshop_Frontend/Properties/launchSettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/Webshop_Frontend/Properties/launchSettings.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -40,6 +38,10 @@
     "accountId": "3188967b-452a-4d40-87aa-3ef5d4103755"
   }
 }]]></component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="mock:///Users/stole/Library/Mobile Documents/com~apple~CloudDocs/RiderProjects/Webshop_Project/Webshop_Frontend/Properties/launchSettings.json" root0="FORCE_HIGHLIGHTING" />
+  </component>
+  <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="true" />
   <component name="ProjectColorInfo"><![CDATA[{
   "associatedIndex": 2
 }]]></component>
@@ -52,7 +54,9 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     ".NET Launch Settings Profile.Webshop_Backend: http.executor": "Run",
+    ".NET Launch Settings Profile.Webshop_Backend: https.executor": "Run",
     ".NET Launch Settings Profile.Webshop_Frontend: http.executor": "Run",
+    ".NET Launch Settings Profile.Webshop_Frontend: https.executor": "Run",
     ".NET Project.Webshop_Backend.executor": "Run",
     ".NET Project.Webshop_Frontend.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
@@ -67,10 +71,10 @@
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
-  <component name="RunManager" selected="Compound.Run Backend and Frontend">
-    <configuration name="Run Backend and Frontend" type="CompoundRunConfigurationType">
-      <toRun name="Webshop_Backend" type="DotNetProject" />
-      <toRun name="Webshop_Frontend" type="DotNetProject" />
+  <component name="RunManager" selected="Compound.Run Frontend and Backend">
+    <configuration name="Run Frontend and Backend" type="CompoundRunConfigurationType">
+      <toRun name="Webshop_Backend: https" type="LaunchSettings" />
+      <toRun name="Webshop_Frontend: https" type="LaunchSettings" />
       <method v="2" />
     </configuration>
     <configuration name="Webshop_Backend" type="DotNetProject" factoryName=".NET Project">
@@ -148,6 +152,7 @@
       <option name="USE_EXTERNAL_CONSOLE" value="0" />
       <option name="USE_MONO" value="0" />
       <option name="RUNTIME_ARGUMENTS" value="" />
+      <browser name="98ca6316-2f89-46d9-a9e5-fa9e2b0625b3" />
       <option name="GENERATE_APPLICATIONHOST_CONFIG" value="1" />
       <option name="SHOW_IIS_EXPRESS_OUTPUT" value="0" />
       <option name="SEND_DEBUG_REQUEST" value="1" />
@@ -212,7 +217,7 @@
       <item itemvalue=".NET Launch Settings Profile.Webshop_Frontend: https" />
       <item itemvalue=".NET Project.Webshop_Backend" />
       <item itemvalue=".NET Project.Webshop_Frontend" />
-      <item itemvalue="Compound.Run Backend and Frontend" />
+      <item itemvalue="Compound.Run Frontend and Backend" />
     </list>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -223,15 +228,27 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1737411252759</updated>
-      <workItem from="1737411254618" duration="3073000" />
+      <workItem from="1737411254618" duration="3412000" />
     </task>
+    <task id="LOCAL-00001" summary="s">
+      <option name="closed" value="true" />
+      <created>1737414455984</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1737414455984</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
+  <component name="UnityCheckinConfiguration" checkUnsavedScenes="true" />
   <component name="UnityProjectConfiguration" hasMinimizedUI="false" />
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
+    <MESSAGE value="s" />
+    <option name="LAST_COMMIT_MESSAGE" value="s" />
   </component>
 </project>
