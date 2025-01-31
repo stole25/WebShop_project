@@ -13,14 +13,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fbcc1cd1-c860-4057-b338-8b6e8e9cac4d" name="Changes" comment="Pocetni frontend slozen">
-      <change afterPath="$PROJECT_DIR$/Webshop_Backend/Models/Category.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Webshop_Frontend/Shared/Category.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Webshop_Backend/Models/Cart.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Webshop_Frontend/Pages/Cart.razor" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Webshop_Frontend/Services/Cartservice.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Webshop_Project/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Webshop_Project/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Webshop_Backend/Data/WebShopDbContext.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Webshop_Backend/Data/WebShopDbContext.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Webshop_Backend/Migrations/20250130235552_InitialCreate.Designer.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Webshop_Backend/Migrations/20250130235552_InitialCreate.cs" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Webshop_Backend/Migrations/WebShopDbContextModelSnapshot.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Webshop_Backend/Migrations/WebShopDbContextModelSnapshot.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Webshop_Backend/Models/Products.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Webshop_Backend/Models/Products.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Webshop_Frontend/Layout/NavMenu.razor" beforeDir="false" afterPath="$PROJECT_DIR$/Webshop_Frontend/Layout/NavMenu.razor" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Webshop_Frontend/Pages/ProductList.razor" beforeDir="false" afterPath="$PROJECT_DIR$/Webshop_Frontend/Pages/ProductList.razor" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Webshop_Frontend/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Webshop_Frontend/Program.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -60,26 +61,26 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;.NET Launch Settings Profile.Webshop_Backend: http.executor&quot;: &quot;Run&quot;,
-    &quot;.NET Launch Settings Profile.Webshop_Backend: https.executor&quot;: &quot;Run&quot;,
-    &quot;.NET Launch Settings Profile.Webshop_Frontend: http.executor&quot;: &quot;Run&quot;,
-    &quot;.NET Launch Settings Profile.Webshop_Frontend: https.executor&quot;: &quot;Run&quot;,
-    &quot;.NET Project.Webshop_Backend.executor&quot;: &quot;Run&quot;,
-    &quot;.NET Project.Webshop_Frontend.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;project.propVCSSupport.DirectoryMappings&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    ".NET Launch Settings Profile.Webshop_Backend: http.executor": "Run",
+    ".NET Launch Settings Profile.Webshop_Backend: https.executor": "Run",
+    ".NET Launch Settings Profile.Webshop_Frontend: http.executor": "Run",
+    ".NET Launch Settings Profile.Webshop_Frontend: https.executor": "Run",
+    ".NET Project.Webshop_Backend.executor": "Run",
+    ".NET Project.Webshop_Frontend.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "main",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "HotReloadSettingsPage",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RunManager" selected="Compound.Run Frontend and Backend">
     <configuration name="Run Frontend and Backend" type="CompoundRunConfigurationType">
       <toRun name="Webshop_Backend: https" type="LaunchSettings" />
