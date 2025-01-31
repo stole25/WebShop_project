@@ -12,16 +12,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fbcc1cd1-c860-4057-b338-8b6e8e9cac4d" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Webshop_Backend/Data/WebShopDbContext.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Webshop_Backend/Data/WebShopDbContextFactory.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Webshop_Backend/Models/Products.cs" afterDir="false" />
+    <list default="true" id="fbcc1cd1-c860-4057-b338-8b6e8e9cac4d" name="Changes" comment="Pocetni frontend slozen">
+      <change afterPath="$PROJECT_DIR$/Webshop_Backend/Models/Category.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Webshop_Frontend/Shared/Category.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Webshop_Project/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Webshop_Project/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Webshop_Backend/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Webshop_Backend/Program.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Webshop_Backend/Properties/launchSettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/Webshop_Backend/Properties/launchSettings.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Webshop_Backend/Webshop_Backend.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Webshop_Backend/Webshop_Backend.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Webshop_Backend/appsettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/Webshop_Backend/appsettings.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Webshop_Frontend/Webshop_Frontend.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Webshop_Frontend/Webshop_Frontend.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Webshop_Backend/Data/WebShopDbContext.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Webshop_Backend/Data/WebShopDbContext.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Webshop_Backend/Migrations/20250130235552_InitialCreate.Designer.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Webshop_Backend/Migrations/20250130235552_InitialCreate.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Webshop_Backend/Migrations/WebShopDbContextModelSnapshot.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Webshop_Backend/Migrations/WebShopDbContextModelSnapshot.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Webshop_Backend/Models/Products.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Webshop_Backend/Models/Products.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -81,7 +80,7 @@
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
-  <component name="RunManager" selected=".NET Launch Settings Profile.Webshop_Backend: https">
+  <component name="RunManager" selected="Compound.Run Frontend and Backend">
     <configuration name="Run Frontend and Backend" type="CompoundRunConfigurationType">
       <toRun name="Webshop_Backend: https" type="LaunchSettings" />
       <toRun name="Webshop_Frontend: https" type="LaunchSettings" />
@@ -168,7 +167,7 @@
       <updated>1737411252759</updated>
       <workItem from="1737411254618" duration="3649000" />
       <workItem from="1738277901922" duration="2507000" />
-      <workItem from="1738280460730" duration="2873000" />
+      <workItem from="1738280460730" duration="7126000" />
     </task>
     <task id="LOCAL-00001" summary="s">
       <option name="closed" value="true" />
@@ -194,7 +193,23 @@
       <option name="project" value="LOCAL" />
       <updated>1737414874559</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Backend namjestanje">
+      <option name="closed" value="true" />
+      <created>1738283570175</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1738283570175</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Pocetni frontend slozen">
+      <option name="closed" value="true" />
+      <created>1738284987727</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1738284987727</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -207,6 +222,8 @@
     <MESSAGE value="s" />
     <MESSAGE value="run both" />
     <MESSAGE value="Initial setup of the projects" />
-    <option name="LAST_COMMIT_MESSAGE" value="Initial setup of the projects" />
+    <MESSAGE value="Backend namjestanje" />
+    <MESSAGE value="Pocetni frontend slozen" />
+    <option name="LAST_COMMIT_MESSAGE" value="Pocetni frontend slozen" />
   </component>
 </project>

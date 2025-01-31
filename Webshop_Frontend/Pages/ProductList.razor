@@ -4,6 +4,16 @@
 
 <h3>Proizvodi</h3>
 
+<div class="mb-3">
+    <select @bind="selectedCategoryId" class="form-control">
+        <option value="0">All Categories</option>
+        @foreach (var category in categories)
+        {
+            <option value="@category.Id">@category.Name</option>
+        }
+    </select>
+</div>
+
 @if (products == null)
 {
     <p>Učitavam...</p>
@@ -11,7 +21,7 @@
 else
 {
     <div class="row">
-        @foreach (var product in products)
+        @foreach (var product in FilteredProducts)
         {
             <div class="col-md-4 mb-4">
                 <div class="card">
@@ -29,9 +39,17 @@ else
 
 @code {
     private Product[] products;
+    private Category[] categories;
+    private int selectedCategoryId = 0;
 
     protected override async Task OnInitializedAsync()
     {
         products = await Http.GetFromJsonAsync<Product[]>("https://localhost:7213/api/products");
+        categories = await Http.GetFromJsonAsync<Category[]>("https://localhost:7213/api/categories");
     }
+
+    private Product[] FilteredProducts =>
+        selectedCategoryId == 0
+            ? products
+            : products.Where(p => p.CategoryId == selectedCategoryId).ToArray();
 }
