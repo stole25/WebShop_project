@@ -24,6 +24,13 @@ builder.Services.AddSwaggerGen(options =>
 builder.Services.AddDbContext<WebShopDbContext>(options => 
     options.UseSqlServer(builder.Configuration.GetConnectionString("WebShopDB"))
 );
+builder.Services.AddCors(options => 
+{
+    options.AddPolicy("AllowBlazorFrontend", builder => 
+        builder.WithOrigins("https://localhost:7145", "http://localhost:5122")
+            .AllowAnyMethod()
+            .AllowAnyHeader());
+});
 
 var app = builder.Build();
 
@@ -51,6 +58,7 @@ app.UseStaticFiles();
 app.UseRouting();
 app.UseAuthorization();
 app.UseAuthorization();
+app.UseCors("AllowBlazorFrontend");
 
 app.MapControllerRoute(
     name: "default",
