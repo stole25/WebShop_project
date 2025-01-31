@@ -12,7 +12,7 @@
     <nav class="flex-column">
         <div class="nav-item px-3">
             <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
-                <span class="bi bi-house-door-fill-nav-menu" aria-hidden="true"></span> Home
+                <span class="bi bi-house-door-fill" aria-hidden="true"></span> Home
             </NavLink>
         </div>
         <div class="nav-item px-3">
@@ -22,7 +22,7 @@
         </div>
         <div class="nav-item px-3">
             <NavLink class="nav-link" href="/cart">
-                <span class="oi oi-cart"></span> Košarica (@CartService.Items.Count)
+                <span class="oi oi-cart"></span> Košarica (@Cart.Items.Sum(i => i.Quantity))
             </NavLink>
         </div>
     </nav>
@@ -33,7 +33,7 @@
     private string? NavMenuCssClass => collapseNavMenu ? "collapse" : null;
 
     [Inject]
-    public CartService CartService { get; set; } = default!;
+    public CartService Cart { get; set; } = default!;
 
     private void ToggleNavMenu()
     {

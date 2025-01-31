@@ -1,31 +1,77 @@
+// WebShop_Frontend/Services/CartService.cs
+using Blazored.LocalStorage;
 using Webshop_Frontend.Shared;
 
-namespace Webshop_Frontend.Services;
-
-public class CartService
+namespace Webshop_Frontend.Services
 {
-    public List<Product> Items { get; private set; } = new();
-    public event Action OnChange;
-
-    public void AddToCart(Product product)
+    public class CartService
     {
-        var existingItem = Items.FirstOrDefault(i => i.Id == product.Id);
-        if (existingItem == null)
+        private readonly ILocalStorageService _localStorage;
+        public List<CartItem> Items { get; private set; } = new();
+        public event Action OnChange;
+
+        public CartService(ILocalStorageService localStorage)
         {
-            Items.Add(product);
+            _localStorage = localStorage;
         }
-        NotifyStateChanged();
-    }
 
-    public void RemoveFromCart(int productId)
-    {
-        var item = Items.FirstOrDefault(i => i.Id == productId);
-        if (item != null)
+        public async Task LoadCart()
         {
-            Items.Remove(item);
+            Items = await _localStorage.GetItemAsync<List<CartItem>>("cart") ?? new List<CartItem>();
             NotifyStateChanged();
         }
+
+        public async Task AddToCart(Product product)
+        {
+            var existingItem = Items.FirstOrDefault(i => i.Product.Id == product.Id);
+            if (existingItem != null)
+            {
+                existingItem.Quantity++;
+            }
+            else
+            {
+                Items.Add(new CartItem { Product = product, Quantity = 1 });
+            }
+
+            await SaveCart();
+        }
+
+        public async Task RemoveFromCart(int productId)
+        {
+            var item = Items.FirstOrDefault(i => i.Product.Id == productId);
+            if (item != null)
+            {
+                Items.Remove(item);
+                await SaveCart();
+            }
+        }
+
+        public async Task UpdateQuantity(int productId, int newQuantity)
+        {
+            var item = Items.FirstOrDefault(i => i.Product.Id == productId);
+            if (item != null)
+            {
+                item.Quantity = newQuantity;
+                await SaveCart();
+            }
+        }
+
+        public decimal GetTotal() => Items.Sum(i => i.Product.Price * i.Quantity);
+
+        private async Task SaveCart()
+        {
+            await _localStorage.SetItemAsync("cart", Items);
+            NotifyStateChanged();
+        }
+        
+
+        private void NotifyStateChanged() => OnChange?.Invoke();
     }
 
-    private void NotifyStateChanged() => OnChange?.Invoke();
+    public class CartItem
+    {
+        public Product Product { get; set; }
+        public int Quantity { get; set; } = 1;
+    }
+    
 }

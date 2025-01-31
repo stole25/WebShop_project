@@ -1,5 +1,4 @@
 @page "/cart"
-@using Webshop_Frontend.Services
 @inject CartService CartService
 
 <h3>Košarica (@CartService.Items.Count)</h3>
@@ -15,9 +14,9 @@ else
         {
             <div class="card mb-3">
                 <div class="card-body">
-                    <h5>@item.Name</h5>
-                    <p>@item.Price.ToString("C")</p>
-                    <button @onclick="() => CartService.RemoveFromCart(item.Id)"
+                    <h5>@item.Product.Name</h5>
+                    <p>@item.Product.Price.ToString("C")</p>
+                    <button @onclick="() => CartService.RemoveFromCart(item.Product.Id)"
                             class="btn btn-danger">
                         Ukloni
                     </button>
@@ -27,6 +26,6 @@ else
     </div>
 
     <div class="text-end">
-        <h4>Ukupno: @CartService.Items.Sum(i => i.Price).ToString("C")</h4>
+        <h4>Ukupno: @CartService.GetTotal().ToString("C")</h4>
     </div>
 }

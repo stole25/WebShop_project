@@ -12,16 +12,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fbcc1cd1-c860-4057-b338-8b6e8e9cac4d" name="Changes" comment="Pocetni frontend slozen">
-      <change afterPath="$PROJECT_DIR$/Webshop_Backend/Models/Cart.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Webshop_Frontend/Pages/Cart.razor" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Webshop_Frontend/Services/Cartservice.cs" afterDir="false" />
+    <list default="true" id="fbcc1cd1-c860-4057-b338-8b6e8e9cac4d" name="Changes" comment="Cart added">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Webshop_Project/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Webshop_Project/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Webshop_Backend/Data/WebShopDbContext.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Webshop_Backend/Data/WebShopDbContext.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Webshop_Backend/Migrations/WebShopDbContextModelSnapshot.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Webshop_Backend/Migrations/WebShopDbContextModelSnapshot.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Webshop_Backend/Webshop_Backend.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Webshop_Backend/Webshop_Backend.csproj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Webshop_Frontend/Layout/NavMenu.razor" beforeDir="false" afterPath="$PROJECT_DIR$/Webshop_Frontend/Layout/NavMenu.razor" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Webshop_Frontend/Pages/Cart.razor" beforeDir="false" afterPath="$PROJECT_DIR$/Webshop_Frontend/Pages/Cart.razor" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Webshop_Frontend/Pages/ProductList.razor" beforeDir="false" afterPath="$PROJECT_DIR$/Webshop_Frontend/Pages/ProductList.razor" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Webshop_Frontend/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Webshop_Frontend/Program.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Webshop_Frontend/Services/Cartservice.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Webshop_Frontend/Services/Cartservice.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Webshop_Frontend/Webshop_Frontend.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Webshop_Frontend/Webshop_Frontend.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Webshop_Frontend/_Imports.razor" beforeDir="false" afterPath="$PROJECT_DIR$/Webshop_Frontend/_Imports.razor" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -47,7 +47,8 @@
   }
 }</component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="mock:///Users/stole/Library/Mobile Documents/com~apple~CloudDocs/RiderProjects/Webshop_Project/Webshop_Frontend/Properties/launchSettings.json" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock:///Users/stole/Library/Mobile Documents/com~apple~CloudDocs/RiderProjects/Webshop_Project/Webshop_Frontend/Services/Cartservice.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file:///usr/local/share/dotnet/sdk/9.0.100/Sdks/Microsoft.NET.Sdk/targets/Microsoft.NET.Sdk.DefaultItems.Shared.targets" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="true" />
   <component name="ProjectColorInfo">{
@@ -210,7 +211,15 @@
       <option name="project" value="LOCAL" />
       <updated>1738284987727</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Cart added">
+      <option name="closed" value="true" />
+      <created>1738291164520</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1738291164520</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -225,6 +234,7 @@
     <MESSAGE value="Initial setup of the projects" />
     <MESSAGE value="Backend namjestanje" />
     <MESSAGE value="Pocetni frontend slozen" />
-    <option name="LAST_COMMIT_MESSAGE" value="Pocetni frontend slozen" />
+    <MESSAGE value="Cart added" />
+    <option name="LAST_COMMIT_MESSAGE" value="Cart added" />
   </component>
 </project>
