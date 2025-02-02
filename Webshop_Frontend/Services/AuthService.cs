@@ -3,7 +3,9 @@ using System.Net.Http.Json;
 using System.Text.Json;
 using Blazored.LocalStorage;
 using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Authorization;
 using Webshop_Frontend.Models;
+using Webshop_Frontend.Services;
 
 public class AuthService
 {
@@ -34,15 +36,14 @@ public class AuthService
             if (!response.IsSuccessStatusCode)
             {
                 var errorContent = await response.Content.ReadAsStringAsync();
-                throw new Exception($"Greška: {errorContent}");
+                throw new Exception(ParseErrorMessage(errorContent));
             }
 
             _navigation.NavigateTo("/login");
         }
         catch (Exception ex)
         {
-            Console.WriteLine($"Registracija nije uspjela: {ex.Message}");
-            throw;
+            throw new Exception($"Registration failed: {ex.Message}");
         }
     }
     
@@ -64,13 +65,28 @@ public class AuthService
 
             var result = await response.Content.ReadFromJsonAsync<LoginResponse>();
             await _localStorage.SetItemAsync("authToken", result.Token);
-            _http.DefaultRequestHeaders.Authorization = 
-                new AuthenticationHeaderValue("Bearer", result.Token);
+            
+            // Update HTTP headers and force reload
+            _http.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", result.Token);
+            _navigation.NavigateTo("/", forceLoad: true);
         }
         catch (Exception ex)
         {
-            throw new Exception("Prijava nije uspjela: " + ex.Message);
+            throw new Exception($"Login failed: {ex.Message}");
         }
+    }
+
+    public async Task Logout()
+    {
+        await _localStorage.RemoveItemAsync("authToken");
+        _http.DefaultRequestHeaders.Authorization = null;
+        _navigation.NavigateTo("/login", forceLoad: true);
+    }
+
+    public async Task<bool> IsLoggedIn()
+    {
+        var token = await _localStorage.GetItemAsync<string>("authToken");
+        return !string.IsNullOrWhiteSpace(token);
     }
 
     private string ParseErrorMessage(string jsonResponse)
@@ -82,29 +98,12 @@ public class AuthService
         }
         catch
         {
-            return "Nepoznata greška";
+            return "Unknown error occurred";
         }
-    }
-
-    public async Task Logout()
-    {
-        await _localStorage.RemoveItemAsync("authToken");
-        _http.DefaultRequestHeaders.Authorization = null;
-        _navigation.NavigateTo("/login");
-    }
-    public async Task<bool> IsLoggedIn()
-    {
-        var token = await _localStorage.GetItemAsync<string>("authToken");
-        return !string.IsNullOrWhiteSpace(token);
     }
 
     private class LoginResponse
     {
         public string Token { get; set; }
-    }
-
-    private class ErrorResponse
-    {
-        public string Message { get; set; }
     }
 }

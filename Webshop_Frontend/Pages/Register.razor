@@ -1,29 +1,32 @@
 @page "/register"
 @using Webshop_Frontend.Models
 @inject AuthService AuthService
+@inject NavigationManager Navigation
 
-<EditForm Model="@registerModel" OnValidSubmit="HandleRegister">
-    <DataAnnotationsValidator />
+<div class="auth-container">
+    <EditForm Model="@registerModel" OnValidSubmit="HandleRegister">
+        <DataAnnotationsValidator />
 
-    <div class="form-group">
-        <label>Email</label>
-        <InputText @bind-Value="registerModel.Email" class="form-control" />
-        <ValidationMessage For="@(() => registerModel.Email)" />
-    </div>
+        <div class="form-group">
+            <label>Email</label>
+            <InputText @bind-Value="registerModel.Email" class="form-control" />
+            <ValidationMessage For="@(() => registerModel.Email)" />
+        </div>
 
-    <div class="form-group">
-        <label>Lozinka</label>
-        <InputText type="password" @bind-Value="registerModel.Password" class="form-control" />
-        <ValidationMessage For="@(() => registerModel.Password)" />
-    </div>
+        <div class="form-group">
+            <label>Lozinka</label>
+            <InputText type="password" @bind-Value="registerModel.Password" class="form-control" />
+            <ValidationMessage For="@(() => registerModel.Password)" />
+        </div>
 
-    @if (!string.IsNullOrEmpty(errorMessage))
-    {
-        <div class="alert alert-danger mt-3">@errorMessage</div>
-    }
+        @if (!string.IsNullOrEmpty(errorMessage))
+        {
+            <div class="alert alert-danger mt-3">@errorMessage</div>
+        }
 
-    <button type="submit" class="btn btn-primary">Registriraj se</button>
-</EditForm>
+        <button type="submit" class="btn btn-primary w-100 mt-3">Registriraj se</button>
+    </EditForm>
+</div>
 
 @code {
     private UserRegistrationDto registerModel = new();
@@ -36,10 +39,11 @@
         try
         {
             await AuthService.Register(registerModel.Email, registerModel.Password);
+            Navigation.NavigateTo("/login");
         }
         catch (Exception ex)
         {
-            errorMessage = ex.Message.Replace("Greška: ", ""); // Ukloni prefiks ako postoji
+            errorMessage = ex.Message.Replace("Greška: ", "");
         }
     }
 }

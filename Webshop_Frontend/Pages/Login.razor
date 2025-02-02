@@ -2,30 +2,31 @@
 @using Webshop_Frontend.Models
 @inject AuthService AuthService
 @inject NavigationManager Navigation
-@inject AuthenticationStateProvider AuthStateProvider
 
-<EditForm Model="@loginModel" OnValidSubmit="HandleLogin">
-    <DataAnnotationsValidator />
+<div class="auth-container">
+    <EditForm Model="@loginModel" OnValidSubmit="HandleLogin">
+        <DataAnnotationsValidator />
 
-    <div class="form-group">
-        <label>Email</label>
-        <InputText @bind-Value="loginModel.Email" class="form-control" />
-        <ValidationMessage For="@(() => loginModel.Email)" />
-    </div>
+        <div class="form-group">
+            <label>Email</label>
+            <InputText @bind-Value="loginModel.Email" class="form-control" />
+            <ValidationMessage For="@(() => loginModel.Email)" />
+        </div>
 
-    <div class="form-group">
-        <label>Lozinka</label>
-        <InputText type="password" @bind-Value="loginModel.Password" class="form-control" />
-        <ValidationMessage For="@(() => loginModel.Password)" />
-    </div>
+        <div class="form-group">
+            <label>Lozinka</label>
+            <InputText type="password" @bind-Value="loginModel.Password" class="form-control" />
+            <ValidationMessage For="@(() => loginModel.Password)" />
+        </div>
 
-    @if (!string.IsNullOrEmpty(errorMessage))
-    {
-        <div class="alert alert-danger mt-3">@errorMessage</div>
-    }
+        @if (!string.IsNullOrEmpty(errorMessage))
+        {
+            <div class="alert alert-danger mt-3">@errorMessage</div>
+        }
 
-    <button type="submit" class="btn btn-primary">Prijavi se</button>
-</EditForm>
+        <button type="submit" class="btn btn-primary w-100 mt-3">Prijavi se</button>
+    </EditForm>
+</div>
 
 @code {
     private UserLoginDto loginModel = new();
@@ -38,7 +39,7 @@
         try
         {
             await AuthService.Login(loginModel.Email, loginModel.Password);
-            Navigation.NavigateTo("/");
+            Navigation.NavigateTo("/", forceLoad: true);
         }
         catch (Exception ex)
         {

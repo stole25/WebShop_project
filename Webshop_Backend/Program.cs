@@ -11,16 +11,17 @@ using Webshop_Backend.Services;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
-builder.Services.AddControllers();
+
 // CORS konfiguracija
-builder.Services.AddCors(options => 
+builder.Services.AddCors(options =>
 {
-    options.AddPolicy("AllowBlazorFrontend", builder => 
+    options.AddPolicy("AllowBlazorFrontend", builder =>
         builder.WithOrigins("https://localhost:7145")
             .AllowAnyMethod()
             .AllowAnyHeader()
             .AllowCredentials());
 });
+builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c => 
 {
