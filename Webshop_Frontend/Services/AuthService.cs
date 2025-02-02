@@ -1,5 +1,6 @@
 using System.Net.Http.Headers;
 using System.Net.Http.Json;
+using System.Text.Json;
 using Blazored.LocalStorage;
 using Microsoft.AspNetCore.Components;
 using Webshop_Frontend.Models;
@@ -19,8 +20,7 @@ public class AuthService
         _localStorage = localStorage;
         _navigation = navigation;
     }
-
-    // AuthService.cs
+    
     public async Task Register(string email, string password)
     {
         try
@@ -45,20 +45,44 @@ public class AuthService
             throw;
         }
     }
-
-
+    
     public async Task Login(string email, string password)
     {
-        var response = await _http.PostAsJsonAsync("api/auth/login", new { Email = email, Password = password });
-
-        if (response.IsSuccessStatusCode)
+        try
         {
+            var response = await _http.PostAsJsonAsync("api/auth/login", new 
+            {
+                Email = email,
+                Password = password
+            });
+
+            if (!response.IsSuccessStatusCode)
+            {
+                var errorContent = await response.Content.ReadAsStringAsync();
+                throw new Exception(ParseErrorMessage(errorContent));
+            }
+
             var result = await response.Content.ReadFromJsonAsync<LoginResponse>();
             await _localStorage.SetItemAsync("authToken", result.Token);
-        
-            // Asinkrono ažuriranje headera
             _http.DefaultRequestHeaders.Authorization = 
                 new AuthenticationHeaderValue("Bearer", result.Token);
+        }
+        catch (Exception ex)
+        {
+            throw new Exception("Prijava nije uspjela: " + ex.Message);
+        }
+    }
+
+    private string ParseErrorMessage(string jsonResponse)
+    {
+        try
+        {
+            var json = JsonDocument.Parse(jsonResponse);
+            return json.RootElement.GetProperty("message").GetString();
+        }
+        catch
+        {
+            return "Nepoznata greška";
         }
     }
 

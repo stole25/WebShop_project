@@ -1,30 +1,31 @@
 @page "/login"
 @using Webshop_Frontend.Models
 @inject AuthService AuthService
-
-<h3>Login</h3>
+@inject NavigationManager Navigation
+@inject AuthenticationStateProvider AuthStateProvider
 
 <EditForm Model="@loginModel" OnValidSubmit="HandleLogin">
     <DataAnnotationsValidator />
-    <ValidationSummary />
 
     <div class="form-group">
         <label>Email</label>
         <InputText @bind-Value="loginModel.Email" class="form-control" />
+        <ValidationMessage For="@(() => loginModel.Email)" />
     </div>
 
     <div class="form-group">
-        <label>Password</label>
+        <label>Lozinka</label>
         <InputText type="password" @bind-Value="loginModel.Password" class="form-control" />
+        <ValidationMessage For="@(() => loginModel.Password)" />
     </div>
 
-    <button type="submit" class="btn btn-primary">Login</button>
-</EditForm>
+    @if (!string.IsNullOrEmpty(errorMessage))
+    {
+        <div class="alert alert-danger mt-3">@errorMessage</div>
+    }
 
-@if (!string.IsNullOrEmpty(errorMessage))
-{
-    <div class="alert alert-danger mt-3">@errorMessage</div>
-}
+    <button type="submit" class="btn btn-primary">Prijavi se</button>
+</EditForm>
 
 @code {
     private UserLoginDto loginModel = new();
@@ -32,14 +33,16 @@
 
     private async Task HandleLogin()
     {
+        errorMessage = string.Empty;
+
         try
         {
             await AuthService.Login(loginModel.Email, loginModel.Password);
-            errorMessage = string.Empty;
+            Navigation.NavigateTo("/");
         }
         catch (Exception ex)
         {
-            errorMessage = ex.Message; // Prikaz greške korisniku
+            errorMessage = ex.Message.Replace("Greška: ", "");
         }
     }
 }

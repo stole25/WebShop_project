@@ -101,3 +101,17 @@ a, .btn-link {
 code {
     color: #c02d76;
 }
+.validation-message {
+    color: #dc3545;
+    font-size: 0.875em;
+    margin-top: 0.25rem;
+}
+
+.alert-danger {
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+    color: #721c24;
+    padding: 0.75rem 1.25rem;
+    margin-top: 1rem;
+    border-radius: 0.25rem;
+}
