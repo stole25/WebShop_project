@@ -1,11 +1,7 @@
+using System.Net.Http.Headers;
 using System.Net.Http.Json;
-
-namespace Webshop_Frontend.Services;
-
-// Webshop_Frontend/Services/AuthService.cs
 using Blazored.LocalStorage;
 using Microsoft.AspNetCore.Components;
-using System.Net.Http.Headers;
 
 public class AuthService
 {
@@ -13,16 +9,13 @@ public class AuthService
     private readonly ILocalStorageService _localStorage;
     private readonly NavigationManager _navigation;
 
-    public AuthService(
-        HttpClient http,
-        ILocalStorageService localStorage,
-        NavigationManager navigation)
+    public AuthService(HttpClient http, ILocalStorageService localStorage, NavigationManager navigation)
     {
         _http = http;
         _localStorage = localStorage;
         _navigation = navigation;
     }
-    
+
     public async Task Register(string email, string password)
     {
         var response = await _http.PostAsJsonAsync("api/auth/register", new { Email = email, Password = password });
@@ -30,40 +23,49 @@ public class AuthService
         if (!response.IsSuccessStatusCode)
         {
             var errorMessage = await response.Content.ReadAsStringAsync();
+            Console.WriteLine($"Registration failed: {errorMessage}"); // Prikaz greške u konzoli
             throw new Exception($"Registration failed: {errorMessage}");
         }
+
+        _navigation.NavigateTo("/login");
     }
 
     public async Task Login(string email, string password)
     {
-        var response = await _http.PostAsJsonAsync("api/auth/login", new { email, password });
+        var response = await _http.PostAsJsonAsync("api/auth/login", new { Email = email, Password = password });
 
-        if (response.IsSuccessStatusCode)
+        if (!response.IsSuccessStatusCode)
         {
-            var result = await response.Content.ReadFromJsonAsync<LoginResponse>();
-            await _localStorage.SetItemAsync("authToken", result.token);
-            _http.DefaultRequestHeaders.Authorization =
-                new AuthenticationHeaderValue("Bearer", result.token);
-            _navigation.NavigateTo("/");
+            var errorMessage = await response.Content.ReadAsStringAsync();
+            Console.WriteLine($"Login failed: {errorMessage}"); // Prikaz greške u konzoli
+            throw new Exception($"Login failed: {errorMessage}");
         }
-        else
-        {
-            // Prikaz poruke korisniku (možda kroz dijalog ili obavest)
-            var error = await response.Content.ReadAsStringAsync();
-            throw new Exception($"Login failed: {error}");
-        }
+
+        var result = await response.Content.ReadFromJsonAsync<LoginResponse>();
+        await _localStorage.SetItemAsync("authToken", result.Token);
+        _http.DefaultRequestHeaders.Authorization =
+            new AuthenticationHeaderValue("Bearer", result.Token);
+
+        _navigation.NavigateTo("/");
     }
-
 
     public async Task Logout()
     {
         await _localStorage.RemoveItemAsync("authToken");
         _http.DefaultRequestHeaders.Authorization = null;
+
+        // Preusmjerite korisnika na login stranicu nakon odjave
         _navigation.NavigateTo("/login");
+    }
+
+    public async Task<bool> IsLoggedIn()
+    {
+        var token = await _localStorage.GetItemAsync<string>("authToken");
+        return !string.IsNullOrWhiteSpace(token);
     }
 
     private class LoginResponse
     {
-        public string token { get; set; }
+        public string Token { get; set; }
     }
 }

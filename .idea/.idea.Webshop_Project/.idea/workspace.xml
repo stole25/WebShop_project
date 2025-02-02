@@ -12,25 +12,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fbcc1cd1-c860-4057-b338-8b6e8e9cac4d" name="Changes" comment="cart">
-      <change afterPath="$PROJECT_DIR$/Webshop_Backend/DTOs/UserLoginDto.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Webshop_Backend/DTOs/UserRegistrationDto.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Webshop_Backend/Models/User.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Webshop_Backend/Services/IPasswordHasher.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Webshop_Frontend/Models/UserLoginDto.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Webshop_Frontend/Models/UserRegistrationDto.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Webshop_Frontend/Pages/Login.razor" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Webshop_Frontend/Pages/Register.razor" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Webshop_Frontend/Services/AuthService.cs" afterDir="false" />
+    <list default="true" id="fbcc1cd1-c860-4057-b338-8b6e8e9cac4d" name="Changes" comment="auth part1 (working so far)">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Webshop_Project/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Webshop_Project/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Webshop_Backend/Data/WebShopDbContext.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Webshop_Backend/Data/WebShopDbContext.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Webshop_Backend/Migrations/WebShopDbContextModelSnapshot.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Webshop_Backend/Migrations/WebShopDbContextModelSnapshot.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Webshop_Backend/Models/Cart.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Webshop_Backend/Models/Cart.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Webshop_Backend/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Webshop_Backend/Program.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Webshop_Backend/Webshop_Backend.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Webshop_Backend/Webshop_Backend.csproj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Webshop_Backend/appsettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/Webshop_Backend/appsettings.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Webshop_Frontend/Layout/NavMenu.razor" beforeDir="false" afterPath="$PROJECT_DIR$/Webshop_Frontend/Layout/NavMenu.razor" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Webshop_Frontend/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Webshop_Frontend/Program.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Webshop_Frontend/Services/AuthService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Webshop_Frontend/Services/AuthService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Webshop_Frontend/Webshop_Frontend.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Webshop_Frontend/Webshop_Frontend.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Webshop_Frontend/_Imports.razor" beforeDir="false" afterPath="$PROJECT_DIR$/Webshop_Frontend/_Imports.razor" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Webshop_Frontend/wwwroot/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/Webshop_Frontend/wwwroot/index.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -60,16 +52,6 @@
     <setting file="mock:///AIAssistantSnippet." root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///AIAssistantSnippet." root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///AIAssistantSnippet." root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///AIAssistantSnippet." root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///AIAssistantSnippet." root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///AIAssistantSnippet." root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///AIAssistantSnippet." root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///AIAssistantSnippet." root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///AIAssistantSnippet." root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///AIAssistantSnippet." root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///AIAssistantSnippet." root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///AIAssistantSnippet." root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///AIAssistantSnippet." root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///AIAssistantSnippet." root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///AIAssistantSnippet." root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///AIAssistantSnippet." root0="SKIP_HIGHLIGHTING" />
@@ -78,19 +60,36 @@
     <setting file="mock:///AIAssistantSnippet." root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///AIAssistantSnippet." root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///AIAssistantSnippet." root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///AIAssistantSnippet." root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///AIAssistantSnippet." root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///AIAssistantSnippet." root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///AIAssistantSnippet." root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///AIAssistantSnippet." root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///AIAssistantSnippet." root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///AIAssistantSnippet." root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///AIAssistantSnippet." root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///AIAssistantSnippet." root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///AIAssistantSnippet." root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///AIAssistantSnippet." root0="SKIP_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
+    <setting file="mock:///AIAssistantSnippet." root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///AIAssistantSnippet." root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///AIAssistantSnippet." root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///AIAssistantSnippet." root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///AIAssistantSnippet." root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///AIAssistantSnippet." root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///AIAssistantSnippet." root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///AIAssistantSnippet." root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///AIAssistantSnippet." root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///AIAssistantSnippet." root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///AIAssistantSnippet." root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///AIAssistantSnippet." root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///AIAssistantSnippet." root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///AIAssistantSnippet." root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///AIAssistantSnippet." root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///AIAssistantSnippet." root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///AIAssistantSnippet." root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///AIAssistantSnippet." root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///AIAssistantSnippet." root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///AIAssistantSnippet." root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///AIAssistantSnippet." root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///AIAssistantSnippet." root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///AIAssistantSnippet." root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///AIAssistantSnippet." root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///AIAssistantSnippet." root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///AIAssistantSnippet." root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="SKIP_HIGHLIGHTING" />
     <setting file="mock:///AIAssistantSnippet." root0="SKIP_HIGHLIGHTING" />
@@ -279,7 +278,15 @@
       <option name="project" value="LOCAL" />
       <updated>1738293917834</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="auth part1 (working so far)">
+      <option name="closed" value="true" />
+      <created>1738519672592</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1738519672592</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -296,6 +303,7 @@
     <MESSAGE value="Pocetni frontend slozen" />
     <MESSAGE value="Cart added" />
     <MESSAGE value="cart" />
-    <option name="LAST_COMMIT_MESSAGE" value="cart" />
+    <MESSAGE value="auth part1 (working so far)" />
+    <option name="LAST_COMMIT_MESSAGE" value="auth part1 (working so far)" />
   </component>
 </project>

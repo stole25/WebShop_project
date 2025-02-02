@@ -1,16 +1,12 @@
 using System.Reflection;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.OpenApi.Models;
-using Webshop_Backend.Data;
-using Swashbuckle.AspNetCore;
-using System.Reflection;
 using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using Webshop_Backend.Data;
 using Webshop_Backend.Services;
-
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -26,9 +22,12 @@ builder.Services.AddSwaggerGen(options =>
     options.IncludeXmlComments(xmlPath);
 });
 
+// Database configuration
 builder.Services.AddDbContext<WebShopDbContext>(options => 
     options.UseSqlServer(builder.Configuration.GetConnectionString("WebShopDB"))
 );
+
+// CORS configuration
 builder.Services.AddCors(options => 
 {
     options.AddPolicy("AllowBlazorFrontend", builder => 
@@ -37,7 +36,7 @@ builder.Services.AddCors(options =>
             .AllowAnyHeader());
 });
 
-// Autentifikacija
+// Authentication and JWT configuration
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
     {
@@ -54,10 +53,10 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         };
     });
 
-// Autorizacija
+// Authorization
 builder.Services.AddAuthorization();
 
-// BCrypt hasher
+// BCrypt hasher service
 builder.Services.AddScoped<IPasswordHasher, BCryptPasswordHasher>();
 
 var app = builder.Build();
@@ -66,7 +65,6 @@ var app = builder.Build();
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
 
@@ -74,19 +72,19 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+
+// Apply CORS policy before authorization
+app.UseCors("AllowBlazorFrontend");
+
+app.UseAuthentication();
+app.UseAuthorization();
+
 app.UseSwagger();
 app.UseSwaggerUI(options => 
 {
     options.SwaggerEndpoint("/swagger/v1/swagger.json", "WebShop API v1");
     options.RoutePrefix = "swagger"; 
 });
-
-app.UseHttpsRedirection();
-app.UseStaticFiles();
-app.UseRouting();
-app.UseAuthorization();
-app.UseAuthorization();
-app.UseCors("AllowBlazorFrontend");
 
 app.MapControllerRoute(
     name: "default",

@@ -1,7 +1,6 @@
 @page "/login"
-@inject AuthService AuthService
-@inject NavigationManager Navigation
 @using Webshop_Frontend.Models
+@inject AuthService AuthService
 
 <h3>Login</h3>
 
@@ -22,9 +21,9 @@
     <button type="submit" class="btn btn-primary">Login</button>
 </EditForm>
 
-@if (errorMessage != null)
+@if (!string.IsNullOrEmpty(errorMessage))
 {
-    <div class="alert alert-danger">@errorMessage</div>
+    <div class="alert alert-danger mt-3">@errorMessage</div>
 }
 
 @code {
@@ -36,11 +35,11 @@
         try
         {
             await AuthService.Login(loginModel.Email, loginModel.Password);
-            Navigation.NavigateTo("/");
+            errorMessage = string.Empty;
         }
         catch (Exception ex)
         {
-            errorMessage = ex.Message;
+            errorMessage = ex.Message; // Prikaz greške korisniku
         }
     }
 }
