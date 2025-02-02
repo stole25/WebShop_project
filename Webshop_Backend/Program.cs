@@ -2,43 +2,38 @@ using System.Reflection;
 using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Webshop_Backend.Data;
 using Webshop_Backend.Services;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
-
-// Add services to the container.
-builder.Services.AddControllersWithViews();
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen(options => 
-{
-    options.SwaggerDoc("v1", new OpenApiInfo { Title = "WebShop API", Version = "v1" });
-    
-    var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
-    var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
-    options.IncludeXmlComments(xmlPath);
-});
-
-// Database configuration
-builder.Services.AddDbContext<WebShopDbContext>(options => 
-    options.UseSqlServer(builder.Configuration.GetConnectionString("WebShopDB"))
-);
-
-// CORS configuration
+builder.Services.AddControllers();
+// CORS konfiguracija
 builder.Services.AddCors(options => 
 {
     options.AddPolicy("AllowBlazorFrontend", builder => 
-        builder.WithOrigins("https://localhost:7145", "http://localhost:5122")
+        builder.WithOrigins("https://localhost:7145")
             .AllowAnyMethod()
-            .AllowAnyHeader());
+            .AllowAnyHeader()
+            .AllowCredentials());
+});
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen(c => 
+{
+    c.SwaggerDoc("v1", new OpenApiInfo { Title = "WebShop API", Version = "v1" });
 });
 
-// Authentication and JWT configuration
+// Database
+builder.Services.AddDbContext<WebShopDbContext>(options => 
+    options.UseSqlServer(builder.Configuration.GetConnectionString("WebShopDB")));
+
+// Autentifikacija
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-    .AddJwtBearer(options =>
+    .AddJwtBearer(options => 
     {
         options.TokenValidationParameters = new TokenValidationParameters
         {
@@ -53,41 +48,27 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         };
     });
 
-// Authorization
 builder.Services.AddAuthorization();
-
-// BCrypt hasher service
-builder.Services.AddScoped<IPasswordHasher, BCryptPasswordHasher>();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
-if (!app.Environment.IsDevelopment())
+// Middleware redoslijed
+app.UseSwagger(); 
+app.UseSwaggerUI(c => 
 {
-    app.UseExceptionHandler("/Home/Error");
-    app.UseHsts();
-}
-
-app.UseHttpsRedirection();
-app.UseStaticFiles();
-
+    c.SwaggerEndpoint("/swagger/v1/swagger.json", "WebShop API v1");
+});
 app.UseRouting();
-
-// Apply CORS policy before authorization
 app.UseCors("AllowBlazorFrontend");
-
 app.UseAuthentication();
 app.UseAuthorization();
 
-app.UseSwagger();
-app.UseSwaggerUI(options => 
+// Razvojni alati
+if (app.Environment.IsDevelopment())
 {
-    options.SwaggerEndpoint("/swagger/v1/swagger.json", "WebShop API v1");
-    options.RoutePrefix = "swagger"; 
-});
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
 
-app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
-
+app.MapControllers();
 app.Run();
