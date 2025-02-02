@@ -11,6 +11,7 @@ public class WebShopDbContext : DbContext
     public DbSet<Category> Categories { get; set; }
     public DbSet<Cart> Carts { get; set; }
     public DbSet<CartItem> CartItems { get; set; }
+    public DbSet<User> Users { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -24,6 +25,11 @@ public class WebShopDbContext : DbContext
         modelBuilder.Entity<Product>()
             .Property(p => p.CategoryId)
             .HasDefaultValue(1);
+        
+        modelBuilder.Entity<User>()
+            .HasOne(u => u.Cart)
+            .WithOne(c => c.User)
+            .HasForeignKey<Cart>(c => c.UserId);
     }
 }
 

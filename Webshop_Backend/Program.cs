@@ -4,7 +4,12 @@ using Microsoft.OpenApi.Models;
 using Webshop_Backend.Data;
 using Swashbuckle.AspNetCore;
 using System.Reflection;
+using System.Text;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using Webshop_Backend.Services;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -31,6 +36,29 @@ builder.Services.AddCors(options =>
             .AllowAnyMethod()
             .AllowAnyHeader());
 });
+
+// Autentifikacija
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(options =>
+    {
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuer = true,
+            ValidateAudience = true,
+            ValidateLifetime = true,
+            ValidateIssuerSigningKey = true,
+            ValidIssuer = builder.Configuration["Jwt:Issuer"],
+            ValidAudience = builder.Configuration["Jwt:Audience"],
+            IssuerSigningKey = new SymmetricSecurityKey(
+                Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]))
+        };
+    });
+
+// Autorizacija
+builder.Services.AddAuthorization();
+
+// BCrypt hasher
+builder.Services.AddScoped<IPasswordHasher, BCryptPasswordHasher>();
 
 var app = builder.Build();
 
