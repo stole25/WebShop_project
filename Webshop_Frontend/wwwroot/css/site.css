@@ -1,0 +1,17 @@
+/* Mobilni pregled */
+@media (max-width: 768px) {
+    .navbar-collapse {
+        background-color: #f8f9fa;
+        padding: 1rem;
+    }
+}
+
+/* Desktop pregled */
+.navbar-nav {
+    gap: 1.5rem;
+}
+
+.container-fluid {
+    max-width: 1400px;
+    margin: 0 auto;
+}

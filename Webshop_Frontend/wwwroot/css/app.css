@@ -115,3 +115,29 @@ code {
     margin-top: 1rem;
     border-radius: 0.25rem;
 }
+/* Fix za fiksnu navigaciju */
+body {
+    padding-top: 80px;
+}
+
+/* Responzivni elementi */
+@media (max-width: 992px) {
+    .navbar-nav {
+        margin-top: 1rem;
+    }
+
+    .nav-item {
+        margin-bottom: 0.5rem;
+    }
+}
+
+/* Sprječavanje preklapanja */
+.navbar {
+    z-index: 1000;
+}
+
+/* Stil za aktivne linkove */
+.nav-link.active {
+    font-weight: 500;
+    color: #0d6efd !important;
+}
