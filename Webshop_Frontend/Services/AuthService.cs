@@ -20,25 +20,32 @@ public class AuthService
         _navigation = navigation;
     }
 
+    // AuthService.cs
     public async Task Register(string email, string password)
     {
         try
         {
-            var request = new HttpRequestMessage(HttpMethod.Post, "api/auth/register")
+            var response = await _http.PostAsJsonAsync("api/auth/register", new 
             {
-                Content = JsonContent.Create(new { Email = email, Password = password })
-            };
-            request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-        
-            var response = await _http.SendAsync(request);
-            response.EnsureSuccessStatusCode(); // Bacit će iznimku za neuspješne statuse
+                Email = email,
+                Password = password
+            });
+
+            if (!response.IsSuccessStatusCode)
+            {
+                var errorContent = await response.Content.ReadAsStringAsync();
+                throw new Exception($"Greška: {errorContent}");
+            }
+
+            _navigation.NavigateTo("/login");
         }
-        catch (HttpRequestException ex)
+        catch (Exception ex)
         {
-            Console.WriteLine($"Greška: {ex.StatusCode} - {ex.Message}");
-            throw new Exception("Registracija nije uspjela");
+            Console.WriteLine($"Registracija nije uspjela: {ex.Message}");
+            throw;
         }
     }
+
 
     public async Task Login(string email, string password)
     {
