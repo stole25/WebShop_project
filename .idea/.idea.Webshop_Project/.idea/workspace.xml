@@ -12,8 +12,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fbcc1cd1-c860-4057-b338-8b6e8e9cac4d" name="Changes" comment=".">
+    <list default="true" id="fbcc1cd1-c860-4057-b338-8b6e8e9cac4d" name="Changes" comment=",">
+      <change afterPath="$PROJECT_DIR$/Webshop_Backend/DTOs/CartItemRequest.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Webshop_Backend/DTOs/CategoryCreateDto.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Webshop_Backend/DTOs/CategoryUpdateDto.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Webshop_Backend/DTOs/ProductCreateDto.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Webshop_Backend/DTOs/ProductUpdateDto.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Webshop_Project/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Webshop_Project/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Webshop_Backend/Controllers/ProductsController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Webshop_Backend/Controllers/ProductsController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Webshop_Backend/Models/Category.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Webshop_Backend/Models/Category.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Webshop_Backend/Models/Products.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Webshop_Backend/Models/Products.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Webshop_Backend/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Webshop_Backend/Program.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -342,7 +351,15 @@
       <option name="project" value="LOCAL" />
       <updated>1738550995969</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary=",">
+      <option name="closed" value="true" />
+      <created>1738551760016</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1738551760016</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -366,6 +383,7 @@
     <MESSAGE value="Funkcionalan log in logout registration i promjena stanja" />
     <MESSAGE value="frontend testiranje" />
     <MESSAGE value="." />
-    <option name="LAST_COMMIT_MESSAGE" value="." />
+    <MESSAGE value="," />
+    <option name="LAST_COMMIT_MESSAGE" value="," />
   </component>
 </project>

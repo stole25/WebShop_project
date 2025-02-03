@@ -64,6 +64,7 @@ namespace Webshop_Frontend.Services
             NotifyStateChanged();
         }
         
+        
 
         private void NotifyStateChanged() => OnChange?.Invoke();
     }

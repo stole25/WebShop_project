@@ -312,3 +312,29 @@ html, body {
         font-size: 1.2rem;
     }
 }
+@keyframes jumpToCart {
+    0% { transform: translateY(0) scale(1); opacity: 1; }
+    50% { transform: translateY(-50px) scale(0.8); opacity: 0.7; }
+    100% { transform: translateY(-100px) translateX(100px) scale(0.5); opacity: 0; }
+}
+
+.product-image {
+    transition: all 0.5s ease;
+    cursor: pointer;
+}
+
+.animate-to-cart {
+    animation: jumpToCart 0.8s ease forwards;
+    position: relative;
+    z-index: 1000;
+}
+
+.cart-counter-bump {
+    animation: bump 0.3s ease;
+}
+
+@keyframes bump {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+    100% { transform: scale(1); }
+}
