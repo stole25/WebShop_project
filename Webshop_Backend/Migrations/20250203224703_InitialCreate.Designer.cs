@@ -11,8 +11,8 @@ using Webshop_Backend.Data;
 namespace Webshop_Backend.Migrations
 {
     [DbContext(typeof(WebShopDbContext))]
-    [Migration("20250203221406_Fix")]
-    partial class Fix
+    [Migration("20250203224703_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

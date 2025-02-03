@@ -5,7 +5,7 @@
 namespace Webshop_Backend.Migrations
 {
     /// <inheritdoc />
-    public partial class Fix : Migration
+    public partial class InitialCreate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

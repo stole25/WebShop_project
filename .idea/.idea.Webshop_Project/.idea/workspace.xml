@@ -12,11 +12,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fbcc1cd1-c860-4057-b338-8b6e8e9cac4d" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/.idea.Webshop_Project/.idea/dataSources.local.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/.idea.Webshop_Project/.idea/dataSources.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Webshop_Frontend/Models/Product.cs" afterDir="false" />
+    <list default="true" id="fbcc1cd1-c860-4057-b338-8b6e8e9cac4d" name="Changes" comment="povuko kontorlere">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Webshop_Project/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Webshop_Project/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Webshop_Backend/Controllers/CartController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Webshop_Backend/Controllers/CartController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Webshop_Backend/Migrations/20250203221406_Fix.Designer.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Webshop_Backend/Migrations/20250203221406_Fix.cs" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -327,7 +327,7 @@
       <workItem from="1738277901922" duration="2507000" />
       <workItem from="1738280460730" duration="7126000" />
       <workItem from="1738608782373" duration="144000" />
-      <workItem from="1738619002123" duration="2945000" />
+      <workItem from="1738619002123" duration="4450000" />
     </task>
     <task id="LOCAL-00001" summary="s">
       <option name="closed" value="true" />
@@ -473,7 +473,15 @@
       <option name="project" value="LOCAL" />
       <updated>1738564354722</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="povuko kontorlere">
+      <option name="closed" value="true" />
+      <created>1738622120081</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1738622120081</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -500,6 +508,7 @@
     <MESSAGE value="," />
     <MESSAGE value="Tocka za povratak: controlleri funkcionalni, treba jos login srediti i order confirmation" />
     <MESSAGE value="Auth i login funkcionalni" />
-    <option name="LAST_COMMIT_MESSAGE" value="Auth i login funkcionalni" />
+    <MESSAGE value="povuko kontorlere" />
+    <option name="LAST_COMMIT_MESSAGE" value="povuko kontorlere" />
   </component>
 </project>

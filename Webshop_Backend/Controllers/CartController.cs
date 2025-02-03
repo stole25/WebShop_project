@@ -1,75 +1,86 @@
-using System.Net.Http.Json;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Webshop_Backend.Data;
 using Webshop_Backend.Models;
 
-namespace Webshop_Frontend.Services
+namespace Webshop_Backend.Controllers
 {
-    public class CartService
+    [Route("api/[controller]")]
+    [ApiController]
+    public class CartController : ControllerBase
     {
-        private readonly HttpClient _http;
-        private Cart _cart = new();
-        public event Action OnCartUpdated;
+        private readonly WebShopDbContext _context;
 
-        public CartService(HttpClient http)
+        public CartController(WebShopDbContext context)
         {
-            _http = http;
+            _context = context;
         }
 
-        public List<CartItem> Items => _cart.Items;
-
-        public async Task AddToCart(Product product, int quantity = 1)
+        [HttpGet("{userId}")]
+        public async Task<ActionResult<Cart>> GetCart(int userId)
         {
-            var existingItem = _cart.Items.FirstOrDefault(i => i.ProductId == product.Id);
-            
+            var cart = await _context.Carts
+                .Include(c => c.Items)
+                .ThenInclude(i => i.Product)
+                .FirstOrDefaultAsync(c => c.UserId == userId);
+
+            return cart ?? await CreateNewCart(userId);
+        }
+
+        [HttpPost("AddItem")]
+        public async Task<ActionResult> AddCartItem([FromBody] CartItemRequest request)
+        {
+            // Dohvati ili kreiraj košaricu
+            var cart = await _context.Carts
+                .Include(c => c.Items)
+                .FirstOrDefaultAsync(c => c.UserId == request.UserId);
+
+            if (cart == null)
+            {
+                cart = new Cart { UserId = request.UserId };
+                _context.Carts.Add(cart);
+            }
+
+            // Provjeri proizvod
+            var product = await _context.Products.FindAsync(request.ProductId);
+            if (product == null)
+            {
+                return NotFound("Proizvod nije pronađen");
+            }
+
+            // Ažuriraj košaricu
+            var existingItem = cart.Items.FirstOrDefault(i => i.ProductId == request.ProductId);
             if (existingItem != null)
             {
-                existingItem.Quantity += quantity;
+                existingItem.Quantity += request.Quantity;
             }
             else
             {
-                _cart.Items.Add(new CartItem
+                cart.Items.Add(new CartItem
                 {
                     ProductId = product.Id,
-                    Quantity = quantity,
-                    Price = product.Price,
-                    Product = product
+                    Quantity = request.Quantity,
+                    Price = product.Price
                 });
             }
 
-            await SaveCart();
-            OnCartUpdated?.Invoke();
+            await _context.SaveChangesAsync();
+            return Ok(cart);
         }
 
-        public async Task LoadCart()
+        private async Task<Cart> CreateNewCart(int userId)
         {
-            var userId = 1; // Privremeno hardkodirano
-            _cart = await _http.GetFromJsonAsync<Cart>($"/api/cart/{userId}") ?? new Cart { UserId = userId };
-            OnCartUpdated?.Invoke();
+            var newCart = new Cart { UserId = userId };
+            _context.Carts.Add(newCart);
+            await _context.SaveChangesAsync();
+            return newCart;
         }
 
-        public async Task RemoveFromCart(int productId)
+        public class CartItemRequest
         {
-            var item = _cart.Items.FirstOrDefault(i => i.ProductId == productId);
-            if (item != null)
-            {
-                _cart.Items.Remove(item);
-                await SaveCart();
-                OnCartUpdated?.Invoke();
-            }
-        }
-
-        public decimal GetTotal()
-        {
-            return _cart.Items.Sum(i => i.Quantity * i.Price);
-        }
-
-        public int GetItemCount()
-        {
-            return _cart.Items.Sum(i => i.Quantity);
-        }
-
-        private async Task SaveCart()
-        {
-            await _http.PutAsJsonAsync($"/api/cart/{_cart.UserId}", _cart);
+            public int UserId { get; set; }
+            public int ProductId { get; set; }
+            public int Quantity { get; set; } = 1;
         }
     }
 }
