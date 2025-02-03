@@ -60,21 +60,32 @@ public class AuthService
             if (!response.IsSuccessStatusCode)
             {
                 var errorContent = await response.Content.ReadAsStringAsync();
-                throw new Exception(ParseErrorMessage(errorContent));
+                throw new Exception(ParseLoginError(errorContent));
             }
 
             var result = await response.Content.ReadFromJsonAsync<LoginResponse>();
             await _localStorage.SetItemAsync("authToken", result.Token);
-            
-            // Update HTTP headers and force reload
             _http.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", result.Token);
-            _navigation.NavigateTo("/", forceLoad: true);
         }
         catch (Exception ex)
         {
-            throw new Exception($"Login failed: {ex.Message}");
+            throw new Exception("Neuspješna prijava: " + ex.Message);
         }
     }
+
+    private string ParseLoginError(string json)
+    {
+        try
+        {
+            using var doc = JsonDocument.Parse(json);
+            return doc.RootElement.GetProperty("message").GetString() ?? "Neispravni podaci za prijavu";
+        }
+        catch
+        {
+            return "Greška u komunikaciji sa serverom";
+        }
+    }
+    
 
     public async Task Logout()
     {

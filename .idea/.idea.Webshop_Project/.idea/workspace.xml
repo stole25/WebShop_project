@@ -13,17 +13,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fbcc1cd1-c860-4057-b338-8b6e8e9cac4d" name="Changes" comment="frontend testiranje">
-      <change afterPath="$PROJECT_DIR$/Webshop_Frontend/Services/AppState.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Webshop_Project/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Webshop_Project/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Webshop_Backend/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Webshop_Backend/Program.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Webshop_Frontend/Layout/MainLayout.razor" beforeDir="false" afterPath="$PROJECT_DIR$/Webshop_Frontend/Layout/MainLayout.razor" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Webshop_Backend/DTOs/UserLoginDto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Webshop_Backend/DTOs/UserLoginDto.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Webshop_Frontend/Layout/NavMenu.razor" beforeDir="false" afterPath="$PROJECT_DIR$/Webshop_Frontend/Layout/NavMenu.razor" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Webshop_Frontend/Models/UserLoginDto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Webshop_Frontend/Models/UserLoginDto.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Webshop_Frontend/Pages/Login.razor" beforeDir="false" afterPath="$PROJECT_DIR$/Webshop_Frontend/Pages/Login.razor" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Webshop_Frontend/Pages/Register.razor" beforeDir="false" afterPath="$PROJECT_DIR$/Webshop_Frontend/Pages/Register.razor" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Webshop_Frontend/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Webshop_Frontend/Program.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Webshop_Frontend/Services/CustomAuthenticationStateProvider.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Webshop_Frontend/wwwroot/css/app.css" beforeDir="false" afterPath="$PROJECT_DIR$/Webshop_Frontend/wwwroot/css/app.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Webshop_Frontend/wwwroot/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/Webshop_Frontend/wwwroot/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Webshop_Frontend/Services/AuthService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Webshop_Frontend/Services/AuthService.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -122,27 +117,27 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    ".NET Launch Settings Profile.Webshop_Backend: http.executor": "Run",
-    ".NET Launch Settings Profile.Webshop_Backend: https.executor": "Run",
-    ".NET Launch Settings Profile.Webshop_Frontend: http.executor": "Run",
-    ".NET Launch Settings Profile.Webshop_Frontend: https.executor": "Run",
-    ".NET Project.Webshop_Backend.executor": "Run",
-    ".NET Project.Webshop_Frontend.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "main",
-    "list.type.of.created.stylesheet": "CSS",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "HotReloadSettingsPage",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;.NET Launch Settings Profile.Webshop_Backend: http.executor&quot;: &quot;Run&quot;,
+    &quot;.NET Launch Settings Profile.Webshop_Backend: https.executor&quot;: &quot;Run&quot;,
+    &quot;.NET Launch Settings Profile.Webshop_Frontend: http.executor&quot;: &quot;Run&quot;,
+    &quot;.NET Launch Settings Profile.Webshop_Frontend: https.executor&quot;: &quot;Run&quot;,
+    &quot;.NET Project.Webshop_Backend.executor&quot;: &quot;Run&quot;,
+    &quot;.NET Project.Webshop_Frontend.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;HotReloadSettingsPage&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager" selected="Compound.Run Frontend and Backend">
     <configuration name="Run Frontend and Backend" type="CompoundRunConfigurationType">
       <toRun name="Webshop_Backend: https" type="LaunchSettings" />

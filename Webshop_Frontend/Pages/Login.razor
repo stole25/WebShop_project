@@ -8,24 +8,36 @@
         <div class="col-md-6">
             <div class="card shadow">
                 <div class="card-body">
-                    <h3 class="card-title mb-4">Login</h3>
-                    
+                    <h3 class="card-title mb-4">Prijava</h3>
+
                     <EditForm Model="@loginModel" OnValidSubmit="HandleLogin">
                         <DataAnnotationsValidator />
-                        
+
                         <div class="mb-3">
                             <label class="form-label">Email</label>
-                            <InputText class="form-control" @bind-Value="loginModel.Email" />
-                            <ValidationMessage For="@(() => loginModel.Email)" />
+                            <InputText @bind-Value="loginModel.Email" class="form-control" />
+                            <ValidationMessage For="@(() => loginModel.Email)" class="text-danger" />
                         </div>
 
                         <div class="mb-3">
-                            <label class="form-label">Password</label>
-                            <InputText type="password" class="form-control" @bind-Value="loginModel.Password" />
-                            <ValidationMessage For="@(() => loginModel.Password)" />
+                            <label class="form-label">Lozinka</label>
+                            <InputText type="password" @bind-Value="loginModel.Password" class="form-control" />
+                            <ValidationMessage For="@(() => loginModel.Password)" class="text-danger" />
                         </div>
 
-                        <button type="submit" class="btn btn-primary w-100">Login</button>
+                        @if (!string.IsNullOrEmpty(errorMessage))
+                        {
+                            <div class="alert alert-danger">@errorMessage</div>
+                        }
+
+                        <button type="submit" class="btn btn-primary w-100">Prijavi se</button>
+
+                        <div class="text-center mt-3">
+                            <small>
+                                Nemate račun?
+                                <a href="/register" class="text-primary">Registrirajte se ovdje</a>
+                            </small>
+                        </div>
                     </EditForm>
                 </div>
             </div>
@@ -35,17 +47,20 @@
 
 @code {
     private UserLoginDto loginModel = new();
-    
+    private string errorMessage;
+
     private async Task HandleLogin()
     {
-        try 
+        errorMessage = null;
+        try
         {
             await AuthService.Login(loginModel.Email, loginModel.Password);
-            Navigation.NavigateTo("/", forceLoad: true);
+            Navigation.NavigateTo("/");
         }
-        catch 
+        catch (Exception ex)
         {
-            // Handle error
+            errorMessage = ex.Message;
+            StateHasChanged();
         }
     }
 }
