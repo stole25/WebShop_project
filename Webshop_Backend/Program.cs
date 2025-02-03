@@ -9,6 +9,8 @@ using Microsoft.OpenApi.Models;
 using Webshop_Backend.Data;
 using Webshop_Backend.Services;
 using System.Text;
+using System.Globalization;
+using Microsoft.AspNetCore.Localization;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -50,6 +52,9 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     });
 
 builder.Services.AddAuthorization();
+var cultureInfo = new CultureInfo("hr-HR"); // Za Hrvatsku ili "de-DE" za Njemačku
+CultureInfo.DefaultThreadCurrentCulture = cultureInfo;
+CultureInfo.DefaultThreadCurrentUICulture = cultureInfo;
 
 var app = builder.Build();
 
@@ -73,4 +78,8 @@ if (app.Environment.IsDevelopment())
 
 app.MapControllers();
 app.UseCors("AllowAll");
+app.UseRequestLocalization(new RequestLocalizationOptions
+{
+    DefaultRequestCulture = new RequestCulture(cultureInfo)
+});
 app.Run();

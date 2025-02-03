@@ -6,21 +6,30 @@
 <h3>Proizvodi</h3>
 
 <div class="container mt-4">
+    <!-- Dropdown za kategorije -->
     <div class="row mb-4">
         <div class="col-md-4">
             <div class="category-filter">
                 <select @bind="selectedCategoryId" class="form-select form-select-sm">
                     <option value="0">Sve kategorije</option>
-                    @foreach (var category in categories)
+                    @if (categories != null && categories.Any())
                     {
-                        <option value="@category.Id">@category.Name</option>
+                        @foreach (var category in categories)
+                        {
+                            <option value="@category.Id">@category.Name</option>
+                        }
+                    }
+                    else
+                    {
+                        <option disabled>Nema dostupnih kategorija</option>
                     }
                 </select>
             </div>
         </div>
     </div>
 
-    @if (products == null)
+    <!-- Prikaz proizvoda -->
+    @if (products == null || products.Length == 0)
     {
         <div class="text-center">
             <div class="spinner-border text-primary" role="status">
@@ -54,25 +63,43 @@
     }
 </div>
 
-
 @code {
     private Product[] products = Array.Empty<Product>();
     private Category[] categories = Array.Empty<Category>();
-    private int selectedCategoryId = 0;
+    private int selectedCategoryId = 0; // Početno 0 - Sve kategorije
 
+    // Metoda za inicijalno učitavanje podataka
     protected override async Task OnInitializedAsync()
+    {
+        await LoadData();
+    }
+
+    private async Task LoadData()
     {
         try
         {
+            // Dohvaćanje proizvoda i kategorija sa API-a
             products = await Http.GetFromJsonAsync<Product[]>("api/products");
-            categories = await Http.GetFromJsonAsync<Category[]>("api/categories");
+            categories = await Http.GetFromJsonAsync<Category[]>("api/Category");
+
+            // Dijagnostika: provjera dohvata
+            if (categories == null || !categories.Any())
+            {
+                Console.WriteLine("Nema dostupnih kategorija.");
+            }
+
+            if (products == null || !products.Any())
+            {
+                Console.WriteLine("Nema dostupnih proizvoda.");
+            }
         }
         catch (Exception ex)
         {
-            Console.WriteLine($"Greška pri učitavanju: {ex.Message}");
+            Console.WriteLine($"Greška pri učitavanju podataka: {ex.Message}");
         }
     }
 
+    // Filtrira proizvode na temelju odabrane kategorije
     private Product[] FilteredProducts =>
         selectedCategoryId == 0
             ? products

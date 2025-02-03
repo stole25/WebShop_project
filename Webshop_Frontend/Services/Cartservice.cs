@@ -1,4 +1,3 @@
-// WebShop_Frontend/Services/CartService.cs
 using Blazored.LocalStorage;
 using Webshop_Frontend.Shared;
 
