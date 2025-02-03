@@ -1,0 +1,28 @@
+@page "/cart/checkout"
+@inject AuthService AuthService
+@inject NavigationManager Navigation
+
+@if (isLoggedIn)
+{
+    <h3>Checkout</h3>
+    <div>
+        <!-- Checkout forma ovdje -->
+    </div>
+}
+else
+{
+    <p>Preusmjeravanje na login...</p>
+}
+
+@code {
+    private bool isLoggedIn;
+
+    protected override async Task OnInitializedAsync()
+    {
+        isLoggedIn = await AuthService.IsLoggedIn();
+        if (!isLoggedIn)
+        {
+            Navigation.NavigateTo("/login");
+        }
+    }
+}

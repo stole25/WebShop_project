@@ -3,9 +3,7 @@ using System.Net.Http.Json;
 using System.Text.Json;
 using Blazored.LocalStorage;
 using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Components.Authorization;
 using Webshop_Frontend.Models;
-using Webshop_Frontend.Services;
 
 public class AuthService
 {
@@ -13,21 +11,22 @@ public class AuthService
     private readonly ILocalStorageService _localStorage;
     private readonly NavigationManager _navigation;
 
-    public AuthService(
-        HttpClient http,
-        ILocalStorageService localStorage,
-        NavigationManager navigation)
+    public AuthService(HttpClient http, ILocalStorageService localStorage, NavigationManager navigation)
     {
         _http = http;
         _localStorage = localStorage;
         _navigation = navigation;
     }
-    
+
+    public event Action OnAuthStateChanged;
+
+    private void NotifyAuthStateChanged() => OnAuthStateChanged?.Invoke();
+
     public async Task Register(string email, string password)
     {
         try
         {
-            var response = await _http.PostAsJsonAsync("api/auth/register", new 
+            var response = await _http.PostAsJsonAsync("api/auth/register", new
             {
                 Email = email,
                 Password = password
@@ -46,12 +45,12 @@ public class AuthService
             throw new Exception($"Registration failed: {ex.Message}");
         }
     }
-    
+
     public async Task Login(string email, string password)
     {
         try
         {
-            var response = await _http.PostAsJsonAsync("api/auth/login", new 
+            var response = await _http.PostAsJsonAsync("api/auth/login", new
             {
                 Email = email,
                 Password = password
@@ -66,10 +65,35 @@ public class AuthService
             var result = await response.Content.ReadFromJsonAsync<LoginResponse>();
             await _localStorage.SetItemAsync("authToken", result.Token);
             _http.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", result.Token);
+
+            NotifyAuthStateChanged();
         }
         catch (Exception ex)
         {
             throw new Exception("Neuspješna prijava: " + ex.Message);
+        }
+    }
+
+    public async Task Logout()
+    {
+        await _localStorage.RemoveItemAsync("authToken");
+        _http.DefaultRequestHeaders.Authorization = null;
+        NotifyAuthStateChanged();
+        _navigation.NavigateTo("/login", forceLoad: true);
+    }
+
+    public async Task<bool> IsLoggedIn()
+    {
+        var token = await _localStorage.GetItemAsync<string>("authToken");
+        return !string.IsNullOrWhiteSpace(token);
+    }
+
+    public async Task Initialize()
+    {
+        var token = await _localStorage.GetItemAsync<string>("authToken");
+        if (!string.IsNullOrWhiteSpace(token))
+        {
+            _http.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
         }
     }
 
@@ -84,20 +108,6 @@ public class AuthService
         {
             return "Greška u komunikaciji sa serverom";
         }
-    }
-    
-
-    public async Task Logout()
-    {
-        await _localStorage.RemoveItemAsync("authToken");
-        _http.DefaultRequestHeaders.Authorization = null;
-        _navigation.NavigateTo("/login", forceLoad: true);
-    }
-
-    public async Task<bool> IsLoggedIn()
-    {
-        var token = await _localStorage.GetItemAsync<string>("authToken");
-        return !string.IsNullOrWhiteSpace(token);
     }
 
     private string ParseErrorMessage(string jsonResponse)
