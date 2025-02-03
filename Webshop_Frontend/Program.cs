@@ -19,5 +19,5 @@ builder.Services.AddBlazoredLocalStorage();
 builder.Services.AddScoped<AuthService>();
 builder.Services.AddScoped<CartService>();
 builder.Services.AddAuthorizationCore();
-
+builder.Services.AddScoped<AppState>();
 await builder.Build().RunAsync();

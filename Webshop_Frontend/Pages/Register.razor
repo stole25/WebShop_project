@@ -3,29 +3,39 @@
 @inject AuthService AuthService
 @inject NavigationManager Navigation
 
-<div class="auth-container">
-    <EditForm Model="@registerModel" OnValidSubmit="HandleRegister">
-        <DataAnnotationsValidator />
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow">
+                <div class="card-body">
+                    <h3 class="card-title mb-4">Registracija</h3>
 
-        <div class="form-group">
-            <label>Email</label>
-            <InputText @bind-Value="registerModel.Email" class="form-control" />
-            <ValidationMessage For="@(() => registerModel.Email)" />
+                    <EditForm Model="@registerModel" OnValidSubmit="HandleRegister">
+                        <DataAnnotationsValidator />
+
+                        <div class="mb-3">
+                            <label class="form-label">Email</label>
+                            <InputText class="form-control" @bind-Value="registerModel.Email" />
+                            <ValidationMessage For="@(() => registerModel.Email)" />
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Lozinka</label>
+                            <InputText type="password" class="form-control" @bind-Value="registerModel.Password" />
+                            <ValidationMessage For="@(() => registerModel.Password)" />
+                        </div>
+
+                        @if (!string.IsNullOrEmpty(errorMessage))
+                        {
+                            <div class="alert alert-danger">@errorMessage</div>
+                        }
+
+                        <button type="submit" class="btn btn-primary w-100">Registriraj se</button>
+                    </EditForm>
+                </div>
+            </div>
         </div>
-
-        <div class="form-group">
-            <label>Lozinka</label>
-            <InputText type="password" @bind-Value="registerModel.Password" class="form-control" />
-            <ValidationMessage For="@(() => registerModel.Password)" />
-        </div>
-
-        @if (!string.IsNullOrEmpty(errorMessage))
-        {
-            <div class="alert alert-danger mt-3">@errorMessage</div>
-        }
-
-        <button type="submit" class="btn btn-primary w-100 mt-3">Registriraj se</button>
-    </EditForm>
+    </div>
 </div>
 
 @code {
@@ -35,7 +45,6 @@
     private async Task HandleRegister()
     {
         errorMessage = string.Empty;
-
         try
         {
             await AuthService.Register(registerModel.Email, registerModel.Password);
@@ -43,7 +52,7 @@
         }
         catch (Exception ex)
         {
-            errorMessage = ex.Message.Replace("Greška: ", "");
+            errorMessage = ex.Message;
         }
     }
 }

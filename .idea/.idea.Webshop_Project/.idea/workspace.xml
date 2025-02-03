@@ -12,11 +12,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fbcc1cd1-c860-4057-b338-8b6e8e9cac4d" name="Changes" comment="Funkcionalan log in logout registration i promjena stanja">
-      <change afterPath="$PROJECT_DIR$/Webshop_Frontend/wwwroot/css/site.css" afterDir="false" />
+    <list default="true" id="fbcc1cd1-c860-4057-b338-8b6e8e9cac4d" name="Changes" comment="frontend testiranje">
+      <change afterPath="$PROJECT_DIR$/Webshop_Frontend/Services/AppState.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Webshop_Project/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Webshop_Project/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Webshop_Backend/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Webshop_Backend/Program.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Webshop_Frontend/Layout/MainLayout.razor" beforeDir="false" afterPath="$PROJECT_DIR$/Webshop_Frontend/Layout/MainLayout.razor" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Webshop_Frontend/Layout/NavMenu.razor" beforeDir="false" afterPath="$PROJECT_DIR$/Webshop_Frontend/Layout/NavMenu.razor" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Webshop_Frontend/Pages/Login.razor" beforeDir="false" afterPath="$PROJECT_DIR$/Webshop_Frontend/Pages/Login.razor" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Webshop_Frontend/Pages/Register.razor" beforeDir="false" afterPath="$PROJECT_DIR$/Webshop_Frontend/Pages/Register.razor" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Webshop_Frontend/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Webshop_Frontend/Program.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Webshop_Frontend/Services/CustomAuthenticationStateProvider.cs" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Webshop_Frontend/wwwroot/css/app.css" beforeDir="false" afterPath="$PROJECT_DIR$/Webshop_Frontend/wwwroot/css/app.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Webshop_Frontend/wwwroot/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/Webshop_Frontend/wwwroot/index.html" afterDir="false" />
     </list>
@@ -331,7 +336,15 @@
       <option name="project" value="LOCAL" />
       <updated>1738538982199</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="frontend testiranje">
+      <option name="closed" value="true" />
+      <created>1738540282553</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1738540282553</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -354,6 +367,7 @@
     <MESSAGE value="funkcionalan register" />
     <MESSAGE value=".." />
     <MESSAGE value="Funkcionalan log in logout registration i promjena stanja" />
-    <option name="LAST_COMMIT_MESSAGE" value="Funkcionalan log in logout registration i promjena stanja" />
+    <MESSAGE value="frontend testiranje" />
+    <option name="LAST_COMMIT_MESSAGE" value="frontend testiranje" />
   </component>
 </project>

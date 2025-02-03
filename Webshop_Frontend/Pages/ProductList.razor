@@ -5,44 +5,55 @@
 
 <h3>Proizvodi</h3>
 
-<div class="mb-3">
-    <select @bind="selectedCategoryId" class="form-control">
-        <option value="0">Sve kategorije</option>
-        @foreach (var category in categories)
-        {
-            <option value="@category.Id">@category.Name</option>
-        }
-    </select>
-</div>
+<div class="container mt-4">
+    <div class="row mb-4">
+        <div class="col-md-4">
+            <div class="category-filter">
+                <select @bind="selectedCategoryId" class="form-select form-select-sm">
+                    <option value="0">Sve kategorije</option>
+                    @foreach (var category in categories)
+                    {
+                        <option value="@category.Id">@category.Name</option>
+                    }
+                </select>
+            </div>
+        </div>
+    </div>
 
-@if (products == null)
-{
-    <p>Učitavam...</p>
-}
-else
-{
-    <div class="row">
-        @foreach (var product in FilteredProducts)
-        {
-            <div class="col-md-4 mb-4">
-                <div class="card h-100">
-                    <img src="@product.ImageUrl" class="card-img-top product-image" alt="@product.Name">
-                    <div class="card-body d-flex flex-column">
-                        <h5 class="card-title">@product.Name</h5>
-                        <p class="card-text">@product.Description</p>
-                        <div class="mt-auto">
-                            <p class="text-success fw-bold">@product.Price.ToString("C")</p>
-                            <button @onclick="() => CartService.AddToCart(product)"
-                                    class="btn btn-primary w-100">
-                                <i class="bi bi-cart-plus"></i> Dodaj u košaricu
-                            </button>
+    @if (products == null)
+    {
+        <div class="text-center">
+            <div class="spinner-border text-primary" role="status">
+                <span class="visually-hidden">Učitavam...</span>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="row">
+            @foreach (var product in FilteredProducts)
+            {
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100 shadow-sm">
+                        <img src="@product.ImageUrl" class="card-img-top product-image" alt="@product.Name">
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="card-title">@product.Name</h5>
+                            <p class="card-text text-muted">@product.Description</p>
+                            <div class="mt-auto">
+                                <p class="text-success fw-bold mb-3">@product.Price.ToString("C")</p>
+                                <button @onclick="() => CartService.AddToCart(product)"
+                                        class="btn btn-primary btn-sm w-100">
+                                    <i class="bi bi-cart-plus"></i> Dodaj u košaricu
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        }
-    </div>
-}
+            }
+        </div>
+    }
+</div>
+
 
 @code {
     private Product[] products = Array.Empty<Product>();

@@ -15,7 +15,7 @@ var builder = WebApplication.CreateBuilder(args);
 // CORS konfiguracija
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("AllowBlazorFrontend", builder =>
+    options.AddPolicy("AllowAll", builder =>
         builder.WithOrigins("https://localhost:7145")
             .AllowAnyMethod()
             .AllowAnyHeader()

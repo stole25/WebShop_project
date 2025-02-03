@@ -1,7 +1,53 @@
 ﻿@page "/"
 
-<PageTitle>Home</PageTitle>
+<PageTitle>Dobrodošli u Webshop</PageTitle>
 
-<h1>Hello, world!</h1>
+<div class="hero-section">
+    <div class="hero-content">
+        <h1 class="hero-title animate__animated animate__fadeInDown">Dobrodošli u Webshop</h1>
+        <p class="hero-subtitle animate__animated animate__fadeIn animate__delay-1s">Otkrijte najbolje proizvode za vas</p>
+        <a href="/products" class="btn btn-primary btn-lg hero-cta animate__animated animate__fadeInUp animate__delay-2s">
+            Pogledajte proizvode
+        </a>
+    </div>
+</div>
 
-Welcome to your new app.
+<div class="featured-categories mt-5">
+    <div class="container">
+        <h2 class="text-center mb-4">Popularne kategorije</h2>
+        <div class="row justify-content-center">
+            @foreach (var category in featuredCategories)
+            {
+                <div class="col-md-4 mb-4">
+                    <div class="category-card animate__animated animate__zoomIn">
+                        <div class="category-image" style="background-image: url('@category.ImageUrl')"></div>
+                        <h3 class="category-title">@category.Name</h3>
+                        <a href="/products?category=@category.Id" class="btn btn-outline-primary">Pogledaj proizvode</a>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+@code {
+    private List<Category> featuredCategories = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        // Simulacija dohvaćanja popularnih kategorija
+        featuredCategories = new List<Category>
+        {
+            new Category { Id = 1, Name = "Elektronika", ImageUrl = "images/electronics.jpg" },
+            new Category { Id = 2, Name = "Odjeća", ImageUrl = "images/fashion.jpg" },
+            new Category { Id = 3, Name = "Sport", ImageUrl = "images/sports.jpg" }
+        };
+    }
+
+    private class Category
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public string ImageUrl { get; set; }
+    }
+}
