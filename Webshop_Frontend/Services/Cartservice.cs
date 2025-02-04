@@ -61,13 +61,16 @@ namespace Webshop_Frontend.Services
 
         public decimal GetTotal() => Items.Sum(i => i.Product.Price * i.Quantity);
 
+        /// <summary>
+        /// Returns the total number of items in the cart (sum of quantities).
+        /// </summary>
+        public int GetTotalItems() => Items.Sum(i => i.Quantity);
+
         private async Task SaveCart()
         {
             await _localStorage.SetItemAsync("cart", Items);
             NotifyStateChanged();
         }
-        
-        
 
         private void NotifyStateChanged() => OnChange?.Invoke();
     }
@@ -77,5 +80,4 @@ namespace Webshop_Frontend.Services
         public Product Product { get; set; }
         public int Quantity { get; set; } = 1;
     }
-    
 }

@@ -1,4 +1,5 @@
 ﻿@inject AuthService AuthService
+@inject CartService CartService
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top shadow">
     <div class="container-fluid">
@@ -21,11 +22,11 @@
                 <!-- Shopping Cart Icon -->
                 <li class="nav-item me-3 position-relative">
                     <a class="nav-link" href="/cart">
-                        <i class="bi bi-cart-fill cart-icon" style="font-size: 1.5rem;"></i>
+                        <i class="bi bi-cart-fill cart-icon" style="font-size: 1.5rem; position: relative;"></i>
                         @if (CartItemCount > 0)
                         {
-                            <!-- Badge for cart items -->
-                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                            <span class="position-absolute badge rounded-pill bg-danger"
+                                  style="font-size: 0.8rem; top: 10px; right: -5px; transform: translate(50%, -50%);">
                                 @CartItemCount
                             </span>
                         }
@@ -67,20 +68,26 @@
 
     protected override async Task OnInitializedAsync()
     {
+        // Pretplata na događaj iz CartService za praćenje promjena
+        CartService.OnChange += UpdateCartItemCount;
+
+        // Inicijalno učitaj broj artikala u košarici
+        UpdateCartItemCount();
+
         isLoggedIn = await AuthService.IsLoggedIn();
         AuthService.OnAuthStateChanged += OnAuthStateChanged;
+    }
 
-        // Inicijaliziraj broj artikala u košarici
-        CartItemCount = await GetCartItemCount();
+    private void UpdateCartItemCount()
+    {
+        // Ažuriraj broj artikala na temelju servisa
+        CartItemCount = CartService.GetTotalItems();
+        StateHasChanged();
     }
 
     private async void OnAuthStateChanged()
     {
         isLoggedIn = await AuthService.IsLoggedIn();
-
-        // Ažuriraj broj artikala kada se stanje autentifikacije promijeni
-        CartItemCount = await GetCartItemCount();
-
         StateHasChanged();
     }
 
@@ -88,17 +95,13 @@
     {
         await AuthService.Logout();
         CartItemCount = 0; // Resetiraj broj artikala
-    }
-
-    // Simuliraj dohvaćanje broja artikala u košarici
-    private Task<int> GetCartItemCount()
-    {
-        // Zamijeniti stvarnom implementacijom poziva API-ja
-        return Task.FromResult(0); // Primjer: kad je prazno
+        StateHasChanged();
     }
 
     public void Dispose()
     {
+        // Ukloni pretplate na događaje kako bi se spriječili memory leakovi
+        CartService.OnChange -= UpdateCartItemCount;
         AuthService.OnAuthStateChanged -= OnAuthStateChanged;
     }
 }
