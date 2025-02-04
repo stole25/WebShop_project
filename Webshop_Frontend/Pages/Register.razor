@@ -16,13 +16,13 @@
                         <div class="mb-3">
                             <label class="form-label">Email</label>
                             <InputText class="form-control" @bind-Value="registerModel.Email" />
-                            <ValidationMessage For="@(() => registerModel.Email)" />
+                            <ValidationMessage For="@(() => registerModel.Email)" class="text-danger" />
                         </div>
 
                         <div class="mb-3">
                             <label class="form-label">Lozinka</label>
                             <InputText type="password" class="form-control" @bind-Value="registerModel.Password" />
-                            <ValidationMessage For="@(() => registerModel.Password)" />
+                            <ValidationMessage For="@(() => registerModel.Password)" class="text-danger" />
                         </div>
 
                         @if (!string.IsNullOrEmpty(errorMessage))
