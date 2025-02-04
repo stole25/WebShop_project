@@ -21,7 +21,7 @@
                 <!-- Shopping Cart Icon -->
                 <li class="nav-item me-3 position-relative">
                     <a class="nav-link" href="/cart">
-                        <i class="bi bi-cart-fill" style="font-size: 1.5rem;"></i>
+                        <i class="bi bi-cart-fill cart-icon" style="font-size: 1.5rem;"></i>
                         @if (CartItemCount > 0)
                         {
                             <!-- Badge for cart items -->
@@ -36,7 +36,7 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="userMenu" role="button"
                        data-bs-toggle="dropdown" aria-expanded="false">
-                        <i class="bi bi-person-circle" style="font-size: 1.5rem;"></i>
+                        <i class="bi bi-person-circle user-icon" style="font-size: 1.5rem;"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userMenu">
                         @if (isLoggedIn)

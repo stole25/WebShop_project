@@ -94,19 +94,17 @@ html, body {
 
 /* Shopping Cart Icon Styling */
 .nav-link i {
-    font-size: 1.5rem;
+    font-size: 3rem;
     color: white;
     transition: color 0.3s ease-in-out;
-    position: relative;
-    display: flex; /* Osigurava fleksibilnost za centriranje */
-    align-items: center; /* Poravnanje ikone u sredinu */
+    position: absolute;
+    display: flex; /* Ensures flexibility for centering */
+    align-items: center; /* Align icon to the center vertically */
     justify-content: center;
+    top: -2rem; 
 }
 
-/* Hover effect for icon */
-.nav-link i:hover {
-    color: #D4AF37;
-}
+
 
 /* Badge for cart item count */
 .nav-link i .badge {
@@ -394,4 +392,19 @@ html, body {
 .dropdown-menu .dropdown-item {
     font-weight: 500; /* Malo boldiran tekst za jasniji prikaz */
     font-size: 0.9rem; /* Malo manji font za čist dizajn (po želji) */
+}
+/* Prilagodba za Shopping Cart ikonicu */
+.cart-icon {
+    font-size: 1.8rem !important; /* Veličina ikone */
+    color: white !important; /* Boja */
+    position: relative !important; /* Omogućuje prilagodbu pozicije */
+    top: -1rem !important; /* Podigni cart ikonicu */
+}
+
+/* Prilagodba za User ikonu */
+.user-icon {
+    font-size: 1.8rem !important; /* Veličina ikone */
+    color: white; /* Boja */
+    position: relative; /* Omogućuje prilagodbu pozicije */
+    top: 6rem; /* Spusti user ikonicu */
 }
