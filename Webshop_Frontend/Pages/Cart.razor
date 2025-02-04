@@ -4,6 +4,14 @@
 @inject NavigationManager Navigation
 
 <div class="cart-container">
+    <!-- Sticky poruka za prijavu -->
+    @if (!isLoggedIn)
+    {
+        <div class="login-warning text-center" @onclick="NavigateToLogin">
+            Prijavite se kako biste nastavili kupovinu
+        </div>
+    }
+
     <h3 class="text-center mb-4">Košarica (@CartService.Items.Sum(i => i.Quantity))</h3>
 
     @if (CartService.Items.Count == 0)
@@ -60,16 +68,13 @@
             <h5 class="mb-0 ms-3">Ukupno: @CartService.GetTotal().ToString("C2")</h5>
             @if (isLoggedIn)
             {
-                <!-- Gumb za plaćanje -->
+                <!-- Gumb za prijavljene korisnike -->
                 <button class="btn btn-primary btn-lg me-3" @onclick="NavigateToCheckout">Nastavi na plaćanje</button>
             }
             else
             {
-                <!-- Gumb onemogućen kad korisnik nije prijavljen -->
-                <div class="d-flex flex-column align-items-center">
-                    <button class="btn btn-secondary btn-lg me-3 mb-2" disabled>Nastavi na plaćanje</button>
-                    <a href="/login" class="text-danger text-decoration-none">Prijavite se da nastavite s kupovinom</a>
-                </div>
+                <!-- Grayed-out gumb bez funkcionalnosti -->
+                <button class="btn btn-secondary btn-lg me-3 grayed-out">Nastavi na plaćanje</button>
             }
         </div>
     </div>
@@ -81,6 +86,24 @@
         max-width: 900px;
         margin: 0 auto;
         padding: 20px;
+    }
+
+    .login-warning {
+        background-color: #f8d7da;
+        color: #842029;
+        padding: 10px 20px;
+        border: 1px solid #f5c2c7;
+        border-radius: 5px;
+        position: sticky;
+        top: -2.5rem; /* Maksimalno podignuto prema gore */
+        z-index: 9999;
+        cursor: pointer;
+        font-size: 1rem;
+        margin-top: -2.5rem; /* Uklanjamo još razmaka ako ga ima */
+    }
+
+    .login-warning:hover {
+        background-color: #f5c2c7;
     }
 
     .cart-item {
@@ -98,7 +121,7 @@
     }
 
     .quantity-controls {
-        display: flex; 
+        display: flex;
         align-items: center;
         gap: 10px;
         font-size: 1.2rem;
@@ -131,8 +154,13 @@
         padding: 10px 20px;
     }
 
-    .cart-footer a {
-        font-size: 0.9rem;
+    /* Simuliraj grayed-out stil bez funkcionalnosti */
+    .btn-secondary.grayed-out {
+        background-color: #d6d6d6;
+        color: #6c757d;
+        border: 1px solid #ccc;
+        pointer-events: none; /* Onemogućuje interakcije */
+        cursor: not-allowed;
     }
 </style>
 
@@ -162,5 +190,11 @@
     private void NavigateToCheckout()
     {
         Navigation.NavigateTo("/cart/checkout");
+    }
+
+    private void NavigateToLogin()
+    {
+        // Preusmjeri na login stranicu
+        Navigation.NavigateTo("/login");
     }
 }

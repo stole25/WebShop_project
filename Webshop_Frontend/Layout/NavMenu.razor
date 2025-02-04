@@ -9,16 +9,20 @@
         </button>
 
         <div class="collapse navbar-collapse" id="navbarNav">
+            <!-- LEFT SIDE: Only "Proizvodi" -->
             <ul class="navbar-nav me-auto">
                 <li class="nav-item">
                     <a class="nav-link" href="/products">Proizvodi</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/cart">Košarica</a>
-                </li>
             </ul>
 
+            <!-- RIGHT SIDE: Auth links and Cart Icon -->
             <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/cart">
+                        <i class="bi bi-cart-fill"></i>
+                    </a>
+                </li>
                 @if (isLoggedIn)
                 {
                     <li class="nav-item">
@@ -43,22 +47,38 @@
 
 @code {
     private bool isLoggedIn;
+    private int CartItemCount; // Broj artikala u košarici
 
     protected override async Task OnInitializedAsync()
     {
         isLoggedIn = await AuthService.IsLoggedIn();
         AuthService.OnAuthStateChanged += OnAuthStateChanged;
+
+        // Inicijaliziraj broj artikala u košarici
+        CartItemCount = await GetCartItemCount();
     }
 
     private async void OnAuthStateChanged()
     {
         isLoggedIn = await AuthService.IsLoggedIn();
+
+        // Ažuriraj broj artikala kada se stanje autentifikacije promijeni
+        CartItemCount = await GetCartItemCount();
+
         StateHasChanged();
     }
 
     private async Task Logout()
     {
         await AuthService.Logout();
+        CartItemCount = 0; // Resetiraj broj artikala
+    }
+
+    // Simuliraj dohvaćanje broja artikala u košarici
+    private Task<int> GetCartItemCount()
+    {
+        // Zamijeniti stvarnom implementacijom poziva API-ja
+        return Task.FromResult(3); // Primjer: trenutno su 3 artikla u košarici
     }
 
     public void Dispose()
