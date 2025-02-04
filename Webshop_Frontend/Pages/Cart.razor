@@ -3,86 +3,131 @@
 @inject AuthService AuthService
 @inject NavigationManager Navigation
 
-<h3>Košarica (@CartService.Items.Sum(i => i.Quantity))</h3>
+<div class="cart-container">
+    <h3 class="text-center mb-4">Košarica (@CartService.Items.Sum(i => i.Quantity))</h3>
 
-@if (CartService.Items.Count == 0)
-{
-    <p>Košarica je prazna</p>
-}
-else
-{
-    <div class="row">
-        <!-- Kolona za artikle -->
-        <div class="col-md-8">
-            <div class="cart-items">
-                @foreach (var item in CartService.Items)
-                {
-                    <div class="card mb-3">
-                        <div class="card-body d-flex align-items-center">
-                            <!-- Slika proizvoda -->
-                            <img src="@item.Product.ImageUrl" alt="@item.Product.Name"
-                                 class="img-thumbnail me-3"
-                                 style="max-width: 100px; max-height: 100px;" />
+    @if (CartService.Items.Count == 0)
+    {
+        <p class="text-center">Vaša košarica je prazna.</p>
+    }
+    else
+    {
+        <!-- Središnji sadržaj: Kola proizvoda -->
+        <div class="cart-items">
+            @foreach (var item in CartService.Items)
+            {
+                <div class="card cart-item mb-3">
+                    <div class="card-body d-flex align-items-center">
+                        <!-- Slika proizvoda -->
+                        <img src="@item.Product.ImageUrl" alt="@item.Product.Name"
+                             class="img-thumbnail me-4 cart-item-image" />
 
-                            <!-- Detalji o proizvodu -->
-                            <div class="flex-grow-1">
-                                <h5>@item.Product.Name</h5>
-                                <p>Cijena po komadu: @(item.Product.Price.ToString("C2"))</p>
+                        <!-- Detalji o proizvodu -->
+                        <div class="flex-grow-1">
+                            <h5 class="mb-1">@item.Product.Name</h5>
+                            <p class="text-muted mb-1">Cijena: @(item.Product.Price.ToString("C2"))</p>
 
-                                <!-- Upravljanje količinom -->
-                                <div class="quantity-controls d-flex align-items-center">
-                                    <button @onclick="() => UpdateQuantity(item.Product.Id, item.Quantity - 1)"
-                                            class="btn btn-light btn-sm px-2 py-1">
-                                        −
-                                    </button>
-                                    <span class="mx-3" style="font-size: 1.2rem; font-weight: bold;">@item.Quantity</span>
-                                    <button @onclick="() => UpdateQuantity(item.Product.Id, item.Quantity + 1)"
-                                            class="btn btn-light btn-sm px-2 py-1">
-                                        +
-                                    </button>
-                                </div>
-
-                                <!-- Total za proizvod -->
-                                <p>Ukupno za ovaj artikl: @String.Format("{0:C2}", item.Quantity * item.Product.Price)</p>
+                            <!-- Upravljanje količinom -->
+                            <div class="quantity-controls d-flex align-items-center">
+                                <button @onclick="() => UpdateQuantity(item.Product.Id, item.Quantity - 1)"
+                                        class="btn btn-light btn-sm px-2 py-1 me-2">−</button>
+                                <span class="quantity-value">@item.Quantity</span>
+                                <button @onclick="() => UpdateQuantity(item.Product.Id, item.Quantity + 1)"
+                                        class="btn btn-light btn-sm px-2 py-1 ms-2">+</button>
                             </div>
 
-                            <!-- Gumb za uklanjanje -->
-                            <button @onclick="() => CartService.RemoveFromCart(item.Product.Id)"
-                                    class="btn btn-danger align-self-start">
-                                Ukloni
-                            </button>
+                            <!-- Ukupno za proizvod -->
+                            <p class="mt-2">Ukupno: @String.Format("{0:C2}", item.Quantity * item.Product.Price)</p>
                         </div>
+
+                        <!-- Gumb za uklanjanje -->
+                        <button @onclick="() => CartService.RemoveFromCart(item.Product.Id)"
+                                class="btn btn-danger">
+                            Ukloni
+                        </button>
                     </div>
-                }
-            </div>
+                </div>
+            }
         </div>
+    }
+</div>
 
-        <!-- Kolona za total i plaćanje -->
-        <div class="col-md-4">
-            <div class="p-3 border rounded">
-                <h4 class="text-end">Ukupno: @CartService.GetTotal().ToString("C2")</h4>
-
-                @if (isLoggedIn)
-                {
-                    <!-- Gumb za plaćanje kada je korisnik prijavljen -->
-                    <button class="btn btn-primary btn-lg w-100 mt-3" @onclick="NavigateToCheckout">
-                        Plaćanje
-                    </button>
-                }
-                else
-                {
-                    <!-- Onemogućen gumb za plaćanje kad korisnik nije prijavljen -->
-                    <button class="btn btn-secondary btn-lg w-100 mt-3" disabled>
-                        Plaćanje
-                    </button>
-                    <p class="text-muted text-center mt-3">
-                        <a href="/login" class="text-decoration-none">Prijavite se</a> kako biste nastavili na plaćanje.
-                    </p>
-                }
-            </div>
+<!-- Fiksni footer za ukupno i plaćanje -->
+@if (CartService.Items.Count > 0)
+{
+    <div class="cart-footer">
+        <div class="d-flex justify-content-between align-items-center w-100">
+            <h5 class="mb-0 ms-3">Ukupno: @CartService.GetTotal().ToString("C2")</h5>
+            @if (isLoggedIn)
+            {
+                <!-- Gumb za plaćanje -->
+                <button class="btn btn-primary btn-lg me-3" @onclick="NavigateToCheckout">Nastavi na plaćanje</button>
+            }
+            else
+            {
+                <!-- Gumb onemogućen kad korisnik nije prijavljen -->
+                <button class="btn btn-secondary btn-lg me-3" disabled>Nastavi na plaćanje</button>
+            }
         </div>
     </div>
 }
+
+<style>
+    /* Glavni stilovi kartice proizvoda */
+    .cart-container {
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+
+    .cart-item {
+        display: flex;
+        align-items: center;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .cart-item-image {
+        max-width: 100px;
+        max-height: 100px;
+        object-fit: cover;
+    }
+
+    .quantity-controls {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 1.2rem;
+    }
+
+    .quantity-value {
+        font-weight: bold;
+        font-size: 1rem;
+    }
+
+    /* Stilovi za footer na dnu */
+    .cart-footer {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        background: #f8f9fa;
+        border-top: 1px solid #ddd;
+        padding: 10px 0;
+        box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
+        z-index: 1000;
+    }
+
+    .cart-footer h5 {
+        font-weight: bold;
+    }
+
+    .cart-footer button {
+        font-size: 1rem;
+        padding: 10px 20px;
+    }
+</style>
 
 @code {
     private bool isLoggedIn;
