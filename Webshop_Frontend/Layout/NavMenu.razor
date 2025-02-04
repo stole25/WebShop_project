@@ -18,28 +18,44 @@
 
             <!-- RIGHT SIDE: Auth links and Cart Icon -->
             <ul class="navbar-nav ms-auto">
-                <li class="nav-item">
+                <!-- Shopping Cart Icon -->
+                <li class="nav-item me-3 position-relative">
                     <a class="nav-link" href="/cart">
-                        <i class="bi bi-cart-fill"></i>
+                        <i class="bi bi-cart-fill" style="font-size: 1.5rem;"></i>
+                        @if (CartItemCount > 0)
+                        {
+                            <!-- Badge for cart items -->
+                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                @CartItemCount
+                            </span>
+                        }
                     </a>
                 </li>
-                @if (isLoggedIn)
-                {
-                    <li class="nav-item">
-                        <button class="btn btn-warning nav-link" @onclick="Logout">
-                            Odjava
-                        </button>
-                    </li>
-                }
-                else
-                {
-                    <li class="nav-item">
-                        <a class="nav-link" href="/login">Prijava</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/register">Registracija</a>
-                    </li>
-                }
+
+                <!-- User Dropdown -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="userMenu" role="button"
+                       data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="bi bi-person-circle" style="font-size: 1.5rem;"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userMenu">
+                        @if (isLoggedIn)
+                        {
+                            <li>
+                                <button class="dropdown-item dropdown-link-custom" @onclick="Logout">Odjava</button>
+                            </li>
+                        }
+                        else
+                        {
+                            <li>
+                                <a class="dropdown-item dropdown-link-custom" href="/login">Prijava</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item dropdown-link-custom" href="/register">Registracija</a>
+                            </li>
+                        }
+                    </ul>
+                </li>
             </ul>
         </div>
     </div>
@@ -78,7 +94,7 @@
     private Task<int> GetCartItemCount()
     {
         // Zamijeniti stvarnom implementacijom poziva API-ja
-        return Task.FromResult(3); // Primjer: trenutno su 3 artikla u košarici
+        return Task.FromResult(0); // Primjer: kad je prazno
     }
 
     public void Dispose()

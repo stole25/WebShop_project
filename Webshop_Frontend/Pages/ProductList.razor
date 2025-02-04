@@ -3,27 +3,41 @@
 @inject HttpClient Http
 @inject CartService CartService
 
-<h3>Proizvodi</h3>
-
 <div class="container mt-4">
     <!-- Dropdown za kategorije -->
     <div class="row mb-4">
         <div class="col-md-4">
-            <div class="category-filter">
-                <select @bind="selectedCategoryId" class="form-select form-select-sm">
-                    <option value="0">Sve kategorije</option>
+            <div class="dropdown">
+                <button class="btn btn-light dropdown-toggle category-dropdown-btn" type="button" id="categoryDropdown"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                    @(selectedCategoryId == 0 ? "Sve kategorije" : categories.FirstOrDefault(c => c.Id == selectedCategoryId)?.Name ?? "Nepoznato")
+                </button>
+                <ul class="dropdown-menu category-dropdown-menu" aria-labelledby="categoryDropdown">
+                    <li>
+                        <button class="dropdown-item dropdown-link-custom" @onclick="() => SelectCategory(0)">
+                            Sve kategorije
+                        </button>
+                    </li>
                     @if (categories != null && categories.Any())
                     {
                         @foreach (var category in categories)
                         {
-                            <option value="@category.Id">@category.Name</option>
+                            <li>
+                                <button class="dropdown-item dropdown-link-custom" @onclick="() => SelectCategory(category.Id)">
+                                    @category.Name
+                                </button>
+                            </li>
                         }
                     }
                     else
                     {
-                        <option disabled>Nema dostupnih kategorija</option>
+                        <li>
+                            <button class="dropdown-item dropdown-link-custom" disabled>
+                                Nema dostupnih kategorija
+                            </button>
+                        </li>
                     }
-                </select>
+                </ul>
             </div>
         </div>
     </div>
@@ -81,17 +95,6 @@
             // Dohvaćanje proizvoda i kategorija sa API-a
             products = await Http.GetFromJsonAsync<Product[]>("api/products");
             categories = await Http.GetFromJsonAsync<Category[]>("api/Category");
-
-            // Dijagnostika: provjera dohvata
-            if (categories == null || !categories.Any())
-            {
-                Console.WriteLine("Nema dostupnih kategorija.");
-            }
-
-            if (products == null || !products.Any())
-            {
-                Console.WriteLine("Nema dostupnih proizvoda.");
-            }
         }
         catch (Exception ex)
         {
@@ -104,4 +107,10 @@
         selectedCategoryId == 0
             ? products
             : products.Where(p => p.CategoryId == selectedCategoryId).ToArray();
+
+    // Metoda za odabir kategorije
+    private void SelectCategory(int categoryId)
+    {
+        selectedCategoryId = categoryId;
+    }
 }

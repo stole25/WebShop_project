@@ -12,12 +12,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fbcc1cd1-c860-4057-b338-8b6e8e9cac4d" name="Changes" comment="mini frontend promjene">
+    <list default="true" id="fbcc1cd1-c860-4057-b338-8b6e8e9cac4d" name="Changes" comment="CSS i frontend uljepsavanje">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Webshop_Project/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Webshop_Project/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Webshop_Frontend/Layout/NavMenu.razor" beforeDir="false" afterPath="$PROJECT_DIR$/Webshop_Frontend/Layout/NavMenu.razor" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Webshop_Frontend/Pages/Cart.razor" beforeDir="false" afterPath="$PROJECT_DIR$/Webshop_Frontend/Pages/Cart.razor" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Webshop_Frontend/Pages/ProductList.razor" beforeDir="false" afterPath="$PROJECT_DIR$/Webshop_Frontend/Pages/ProductList.razor" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Webshop_Frontend/wwwroot/css/app.css" beforeDir="false" afterPath="$PROJECT_DIR$/Webshop_Frontend/wwwroot/css/app.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Webshop_Frontend/wwwroot/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/Webshop_Frontend/wwwroot/index.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -65,6 +64,7 @@
     <setting file="mock:///AIAssistantSnippet." root0="SKIP_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
     <setting file="mock:///AIAssistantSnippet." root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="SKIP_HIGHLIGHTING" />
     <setting file="mock:///AIAssistantSnippet." root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///AIAssistantSnippet." root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="SKIP_HIGHLIGHTING" />
     <setting file="mock:///AIAssistantSnippet." root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///AIAssistantSnippet." root0="SKIP_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
     <setting file="mock:///AIAssistantSnippet." root0="SKIP_HIGHLIGHTING" />
@@ -77,6 +77,7 @@
     <setting file="mock:///AIAssistantSnippet." root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///AIAssistantSnippet." root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///AIAssistantSnippet." root0="SKIP_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
+    <setting file="mock:///AIAssistantSnippet." root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="SKIP_HIGHLIGHTING" />
     <setting file="mock:///AIAssistantSnippet." root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///AIAssistantSnippet." root0="SKIP_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
     <setting file="mock:///AIAssistantSnippet." root0="SKIP_HIGHLIGHTING" />
@@ -97,6 +98,7 @@
     <setting file="mock:///AIAssistantSnippet." root0="SKIP_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
     <setting file="mock:///AIAssistantSnippet." root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///AIAssistantSnippet." root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///AIAssistantSnippet." root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="SKIP_HIGHLIGHTING" />
     <setting file="mock:///AIAssistantSnippet." root0="SKIP_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
     <setting file="mock:///AIAssistantSnippet." root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///AIAssistantSnippet." root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="SKIP_HIGHLIGHTING" />
@@ -118,8 +120,10 @@
     <setting file="mock:///AIAssistantSnippet." root0="SKIP_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
     <setting file="mock:///AIAssistantSnippet." root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///AIAssistantSnippet." root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///AIAssistantSnippet." root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="SKIP_HIGHLIGHTING" />
     <setting file="mock:///AIAssistantSnippet." root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///AIAssistantSnippet." root0="SKIP_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
+    <setting file="mock:///AIAssistantSnippet." root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="SKIP_HIGHLIGHTING" />
     <setting file="mock:///AIAssistantSnippet." root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="SKIP_HIGHLIGHTING" />
     <setting file="mock:///AIAssistantSnippet." root0="SKIP_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
     <setting file="mock:///AIAssistantSnippet." root0="SKIP_HIGHLIGHTING" />
@@ -274,7 +278,7 @@
       <workItem from="1738277901922" duration="2507000" />
       <workItem from="1738280460730" duration="7126000" />
       <workItem from="1738608782373" duration="144000" />
-      <workItem from="1738619002123" duration="20353000" />
+      <workItem from="1738619002123" duration="21085000" />
     </task>
     <task id="LOCAL-00001" summary="s">
       <option name="closed" value="true" />
@@ -460,7 +464,15 @@
       <option name="project" value="LOCAL" />
       <updated>1738637074102</updated>
     </task>
-    <option name="localTasksCounter" value="24" />
+    <task id="LOCAL-00024" summary="CSS i frontend uljepsavanje">
+      <option name="closed" value="true" />
+      <created>1738641909472</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1738641909472</updated>
+    </task>
+    <option name="localTasksCounter" value="25" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -492,6 +504,7 @@
     <MESSAGE value="Order implemented functionally" />
     <MESSAGE value="male promjene sa cart izgledom (cart stranicom)" />
     <MESSAGE value="mini frontend promjene" />
-    <option name="LAST_COMMIT_MESSAGE" value="mini frontend promjene" />
+    <MESSAGE value="CSS i frontend uljepsavanje" />
+    <option name="LAST_COMMIT_MESSAGE" value="CSS i frontend uljepsavanje" />
   </component>
 </project>

@@ -378,3 +378,20 @@ html, body {
     50% { transform: scale(1.2); }
     100% { transform: scale(1); }
 }
+/* Dropdown links styling (global za sva dropdown-item) */
+.dropdown-item {
+    color: #333 !important; /* Tamnosivi tekst za bolju vidljivost */
+    background-color: transparent !important; /* Ukloni pozadinu */
+    transition: background-color 0.2s, color 0.2s; /* Glatki prijelaz efekata */
+}
+
+.dropdown-item:hover {
+    color: #000 !important; /* Crni tekst na hover */
+    background-color: #f8f9fa !important; /* Svijetlosiva pozadina na hover */
+}
+
+/* Specifično za .dropdown-item unutar našeg menija */
+.dropdown-menu .dropdown-item {
+    font-weight: 500; /* Malo boldiran tekst za jasniji prikaz */
+    font-size: 0.9rem; /* Malo manji font za čist dizajn (po želji) */
+}
