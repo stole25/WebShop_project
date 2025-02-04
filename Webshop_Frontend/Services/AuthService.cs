@@ -106,7 +106,7 @@ public class AuthService
         }
         catch
         {
-            return "Greška u komunikaciji sa serverom";
+            return "Neispravni podaci za prijavu";
         }
     }
 
