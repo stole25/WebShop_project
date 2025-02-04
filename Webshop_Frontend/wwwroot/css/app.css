@@ -80,10 +80,11 @@ html, body {
     text-decoration: none !important;
 }
 
-/* ===================== HOVER EFEKTI ===================== */
+/* ===================== NOVI HOVER EFEKTI ===================== */
 .nav-link:hover {
-    background: rgba(0,0,0,0.15);
-    transform: translateY(-2px);
+    color: #D4AF37 !important;
+    background: transparent !important;
+    transform: none !important;
 }
 
 .nav-link:active {
@@ -91,11 +92,17 @@ html, body {
     box-shadow: inset 0 4px 8px rgba(0,0,0,0.1);
 }
 
+.nav-link:hover i {
+    color: #D4AF37 !important;
+    transform: scale(1.15);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
 /* ===================== IKONE ===================== */
 .nav-link i {
     font-size: 3rem;
     color: white;
-    transition: color 0.3s ease-in-out;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     position: absolute;
     display: flex;
     align-items: center;
@@ -114,6 +121,16 @@ html, body {
     padding: 4px 8px;
     font-weight: bold;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25);
+}
+
+/* ===================== GUMBI U NAVBARU ===================== */
+.navbar .btn {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.navbar .btn:hover {
+    transform: scale(1.08);
+    color: #D4AF37 !important;
 }
 
 /* ===================== SPECIFIČNE IKONE ===================== */

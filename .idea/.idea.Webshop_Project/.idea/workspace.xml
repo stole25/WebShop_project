@@ -12,9 +12,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fbcc1cd1-c860-4057-b338-8b6e8e9cac4d" name="Changes" comment="">
+    <list default="true" id="fbcc1cd1-c860-4057-b338-8b6e8e9cac4d" name="Changes" comment="css">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Webshop_Project/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Webshop_Project/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Webshop_Frontend/Layout/NavMenu.razor" beforeDir="false" afterPath="$PROJECT_DIR$/Webshop_Frontend/Layout/NavMenu.razor" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Webshop_Frontend/wwwroot/css/app.css" beforeDir="false" afterPath="$PROJECT_DIR$/Webshop_Frontend/wwwroot/css/app.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -181,7 +180,7 @@
       <workItem from="1738647864797" duration="543000" />
       <workItem from="1738648438208" duration="4032000" />
       <workItem from="1738688402485" duration="3280000" />
-      <workItem from="1738692736988" duration="3771000" />
+      <workItem from="1738692736988" duration="6248000" />
     </task>
     <task id="LOCAL-00001" summary="s">
       <option name="closed" value="true" />
@@ -415,7 +414,23 @@
       <option name="project" value="LOCAL" />
       <updated>1738652314020</updated>
     </task>
-    <option name="localTasksCounter" value="30" />
+    <task id="LOCAL-00030" summary="nabar fix">
+      <option name="closed" value="true" />
+      <created>1738696747546</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1738696747546</updated>
+    </task>
+    <task id="LOCAL-00031" summary="css">
+      <option name="closed" value="true" />
+      <created>1738698450375</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1738698450375</updated>
+    </task>
+    <option name="localTasksCounter" value="32" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -425,8 +440,6 @@
   <component name="UnityProjectConfiguration" hasMinimizedUI="false" />
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="Backend namjestanje" />
-    <MESSAGE value="Pocetni frontend slozen" />
     <MESSAGE value="Cart added" />
     <MESSAGE value="cart" />
     <MESSAGE value="auth part1 (working so far)" />
@@ -450,6 +463,8 @@
     <MESSAGE value="boje na greskama register" />
     <MESSAGE value="pass str traka" />
     <MESSAGE value="Login password block" />
-    <option name="LAST_COMMIT_MESSAGE" value="Login password block" />
+    <MESSAGE value="nabar fix" />
+    <MESSAGE value="css" />
+    <option name="LAST_COMMIT_MESSAGE" value="css" />
   </component>
 </project>
