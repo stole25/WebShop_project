@@ -13,24 +13,36 @@
                     <EditForm Model="@loginModel" OnValidSubmit="HandleLogin">
                         <DataAnnotationsValidator />
 
+                        <!-- Unos email-a -->
                         <div class="mb-3">
                             <label class="form-label">Email</label>
                             <InputText @bind-Value="loginModel.Email" class="form-control" />
                             <ValidationMessage For="@(() => loginModel.Email)" class="text-danger" />
                         </div>
 
+                        <!-- Unos lozinke -->
                         <div class="mb-3">
                             <label class="form-label">Lozinka</label>
-                            <InputText type="password" @bind-Value="loginModel.Password" class="form-control" />
-                            <ValidationMessage For="@(() => loginModel.Password)" class="text-danger" />
+                            <input type="password" 
+                                   class="form-control"
+                                   value="@loginModel.Password"
+                                   @oninput="(e) => OnPasswordInput(e)" />
+
+                            <!-- Poruka validacije je uklonjena -->
                         </div>
 
+                        <!-- Poruka o grešci ako postoji -->
                         @if (!string.IsNullOrEmpty(errorMessage))
                         {
                             <div class="alert alert-danger">@errorMessage</div>
                         }
 
-                        <button type="submit" class="btn btn-primary w-100">Prijavi se</button>
+                        <!-- Dinamički onemogućeno dugme za prijavu -->
+                        <button type="submit"
+                                class="@($"btn w-100 {(IsPasswordValid ? "btn-primary" : "btn-secondary disabled")}")"
+                                disabled="@(IsPasswordValid == false)">
+                            Prijavi se
+                        </button>
 
                         <div class="text-center mt-3">
                             <small>
@@ -49,9 +61,31 @@
     private UserLoginDto loginModel = new();
     private string errorMessage;
 
+    // Validacija lozinke (true = validna, false = nevalidna)
+    private bool IsPasswordValid => !string.IsNullOrEmpty(loginModel.Password) && loginModel.Password.Length >= 6;
+
+    // Obrada unosa lozinke
+    private void OnPasswordInput(ChangeEventArgs e)
+    {
+        string password = e.Value?.ToString() ?? string.Empty;
+        loginModel.Password = password; // Ažuriraj model
+
+        // Ručno osveži UI jer je validacija dinamička
+        StateHasChanged();
+    }
+
+    // Obrada prijave
     private async Task HandleLogin()
     {
         errorMessage = null;
+
+        // Finalna provera pre slanja
+        if (!IsPasswordValid)
+        {
+            // Isključeno prikazivanje direktne poruke o validaciji
+            return;
+        }
+
         try
         {
             await AuthService.Login(loginModel.Email, loginModel.Password);
