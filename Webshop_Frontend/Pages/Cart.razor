@@ -66,7 +66,10 @@
             else
             {
                 <!-- Gumb onemogućen kad korisnik nije prijavljen -->
-                <button class="btn btn-secondary btn-lg me-3" disabled>Nastavi na plaćanje</button>
+                <div class="d-flex flex-column align-items-center">
+                    <button class="btn btn-secondary btn-lg me-3 mb-2" disabled>Nastavi na plaćanje</button>
+                    <a href="/login" class="text-danger text-decoration-none">Prijavite se da nastavite s kupovinom</a>
+                </div>
             }
         </div>
     </div>
@@ -95,7 +98,7 @@
     }
 
     .quantity-controls {
-        display: flex;
+        display: flex; 
         align-items: center;
         gap: 10px;
         font-size: 1.2rem;
@@ -126,6 +129,10 @@
     .cart-footer button {
         font-size: 1rem;
         padding: 10px 20px;
+    }
+
+    .cart-footer a {
+        font-size: 0.9rem;
     }
 </style>
 
