@@ -19,7 +19,7 @@ public class AuthService
     }
 
     public event Action OnAuthStateChanged;
-
+    public User CurrentUser { get; private set; }
     private void NotifyAuthStateChanged() => OnAuthStateChanged?.Invoke();
 
     public async Task Register(string email, string password)

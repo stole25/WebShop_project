@@ -1,0 +1,70 @@
+@page "/order-confirmation/{orderId:int}"
+@using Webshop_Frontend.Models
+@inject HttpClient Http
+
+@if (order == null)
+{
+    <p class="text-center">Učitavanje potvrde...</p>
+}
+else
+{
+    <div class="card shadow">
+        <div class="card-body">
+            <h3 class="card-title">Hvala na narudžbi! 🎉</h3>
+            <div class="row mt-4">
+                <div class="col-md-6">
+                    <h5>Detalji narudžbe</h5>
+                    <p><strong>Broj narudžbe:</strong> @order.Id</p>
+                    <p><strong>Datum:</strong> @order.OrderDate.ToString("dd.MM.yyyy HH:mm")</p>
+                    <p><strong>Način plaćanja:</strong> @order.PaymentMethod</p>
+                </div>
+                <div class="col-md-6">
+                    <h5>Kontakt podaci</h5>
+                    <p>@order.FullName</p>
+                    <p>@order.Address</p>
+                    <p>@order.Email</p>
+                    @if (!string.IsNullOrEmpty(order.Phone))
+                    {
+                        <p>@order.Phone</p>
+                    }
+                </div>
+            </div>
+            
+            <div class="mt-4">
+                <h5>Proizvodi</h5>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Proizvod</th>
+                            <th>Količina</th>
+                            <th>Cijena</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in order.Items)
+                        {
+                            <tr>
+                                <td>@item.ProductName</td>
+                                <td>@item.Quantity</td>
+                                <td>@item.Price.ToString("C")</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+                <h4 class="text-end">Ukupno: @order.Total.ToString("C")</h4>
+            </div>
+        </div>
+    </div>
+}
+
+@code {
+    [Parameter]
+    public int OrderId { get; set; }
+
+    private Order order;
+
+    protected override async Task OnInitializedAsync()
+    {
+        order = await Http.GetFromJsonAsync<Order>($"api/orders/{OrderId}");
+    }
+}

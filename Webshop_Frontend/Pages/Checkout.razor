@@ -1,28 +1,210 @@
 @page "/cart/checkout"
-@inject AuthService AuthService
+@using Webshop_Frontend.Models
+@using Webshop_Frontend.Services
+@inject CartService CartService
+@inject HttpClient Http
 @inject NavigationManager Navigation
+@inject AuthService AuthService
 
-@if (isLoggedIn)
+<h3>Završetak kupnje</h3>
+
+@if (CartService.Items.Count == 0)
 {
-    <h3>Checkout</h3>
-    <div>
-        <!-- Checkout forma ovdje -->
+    <div class="alert alert-warning">
+        Košarica je prazna
+        <button @onclick="NavigateToProducts" class="btn btn-primary mt-3">Povratak na proizvode</button>
     </div>
 }
 else
 {
-    <p>Preusmjeravanje na login...</p>
+    <EditForm Model="@orderDto" OnValidSubmit="@PlaceOrder">
+        <DataAnnotationsValidator />
+        <ValidationSummary />
+
+        <!-- Podaci korisnika -->
+        <div class="form-group mb-3">
+            <label>Ime i prezime:</label>
+            <InputText @bind-Value="orderDto.FullName" class="form-control" />
+            <ValidationMessage For="@(() => orderDto.FullName)" />
+        </div>
+
+        <div class="form-group mb-3">
+            <label>Adresa dostave:</label>
+            <InputText @bind-Value="orderDto.Address" class="form-control" />
+            <ValidationMessage For="@(() => orderDto.Address)" />
+        </div>
+
+        <div class="form-group mb-3">
+            <label>Email:</label>
+            <InputText @bind-Value="orderDto.Email" class="form-control" />
+            <ValidationMessage For="@(() => orderDto.Email)" />
+        </div>
+
+        <div class="form-group mb-3">
+            <label>Telefon (opcionalno):</label>
+            <InputText @bind-Value="orderDto.Phone" class="form-control" />
+            <ValidationMessage For="@(() => orderDto.Phone)" />
+        </div>
+
+        <!-- Način plaćanja -->
+        <div class="form-group mb-4">
+            <label>Način plaćanja:</label>
+            <InputSelect @bind-Value="orderDto.PaymentMethod" class="form-select">
+                @foreach (PaymentMethod method in Enum.GetValues(typeof(PaymentMethod)))
+                {
+                    <option value="@method">@method</option>
+                }
+            </InputSelect>
+            <ValidationMessage For="@(() => orderDto.PaymentMethod)" />
+        </div>
+
+        <!-- Dinamički podaci za način plaćanja -->
+        @if (orderDto.PaymentMethod == PaymentMethod.Kartica)
+        {
+            <div class="card p-3 mb-3 shadow-sm" style="max-width: 400px; margin: 0 auto;">
+                <h5 class="text-center">Detalji plaćanja karticom</h5>
+                <div class="form-group mb-3">
+                    <label>Broj kartice:</label>
+                    <InputText @bind-Value="orderDto.CardNumber" class="form-control" placeholder="1234 5678 9012 3456" />
+                    <ValidationMessage For="@(() => orderDto.CardNumber)" />
+                </div>
+
+                <div class="form-group mb-3">
+                    <label>Datum isteka (MM/YY):</label>
+                    <InputText @bind-Value="orderDto.ExpirationDate" class="form-control" placeholder="MM/YY" />
+                    <ValidationMessage For="@(() => orderDto.ExpirationDate)" />
+                </div>
+
+                <div class="form-group mb-3">
+                    <label>CVV:</label>
+                    <InputText @bind-Value="orderDto.CVV" class="form-control" placeholder="123" type="password" />
+                    <ValidationMessage For="@(() => orderDto.CVV)" />
+                </div>
+            </div>
+        }
+        else if (orderDto.PaymentMethod == PaymentMethod.PayPal)
+        {
+            <div class="card p-3 mb-3 shadow-sm" style="max-width: 400px; margin: 0 auto; text-align: center;">
+                <h5 class="mb-3">Prijava na PayPal</h5>
+                <div>
+                    <img src="https://www.paypalobjects.com/webstatic/mktg/Logo/pp-logo-100px.png" alt="PayPal" style="height: 50px;" />
+                    <br />
+                    <button
+                        class="btn mt-3"
+                        style="background-color: #0070ba; color: white; border: none; padding: 8px 12px; font-size: 14px; border-radius: 4px;"
+                        @onclick="RedirectToPayPal"
+                    >
+                        Prijavi se na PayPal
+                    </button>
+                </div>
+            </div>
+        }
+
+        <!-- Dugme za potvrdu narudžbe -->
+        <button type="submit" class="btn btn-success w-100 mt-3">
+            <i class="bi bi-check-circle"></i> Završi narudžbu
+        </button>
+    </EditForm>
 }
 
 @code {
-    private bool isLoggedIn;
+    private OrderDto orderDto = new();
 
-    protected override async Task OnInitializedAsync()
+    protected override void OnInitialized()
     {
-        isLoggedIn = await AuthService.IsLoggedIn();
-        if (!isLoggedIn)
+        // Ako je korisnik prijavljen, popuni njegovo ime i email u formi
+        if (AuthService.CurrentUser != null)
         {
-            Navigation.NavigateTo("/login");
+            orderDto.FullName = AuthService.CurrentUser.FullName;
+            orderDto.Email = AuthService.CurrentUser.Email;
+        }
+
+        // Ako je korpa prazna, preusmeri na stranicu proizvoda
+        if (CartService.Items.Count == 0)
+        {
+            NavigateToProducts();
         }
     }
+
+    private async Task PlaceOrder()
+    {
+        try
+        {
+            // Dodaj stavke iz korpe u DTO pre slanja na backend
+            orderDto.Items = CartService.Items.Select(i => new OrderItemDto
+            {
+                ProductId = i.Product.Id,
+                ProductName = i.Product.Name,
+                Quantity = i.Quantity,
+                Price = i.Product.Price
+            }).ToList();
+            orderDto.Total = CartService.GetTotal(); // Ukupna cena
+
+            // Pošalji narudžbu na backend, koristeći odgovarajući način plaćanja
+            var response = await Http.PostAsJsonAsync("api/orders", orderDto);
+
+            if (response.IsSuccessStatusCode)
+            {
+                // Preusmeri na potvrdu narudžbe
+                var orderId = await response.Content.ReadFromJsonAsync<int>();
+                CartService.ClearCart();
+                Navigation.NavigateTo($"/order-confirmation/{orderId}");
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Greška pri kreiranju narudžbe: {ex.Message}");
+        }
+    }
+
+    private void NavigateToProducts()
+    {
+        Navigation.NavigateTo("/products");
+    }
+
+    private void RedirectToPayPal()
+    {
+        Navigation.NavigateTo("https://www.paypal.com", true);
+    }
+
+    public class OrderDto
+    {
+        [Required(ErrorMessage = "Ime i prezime je obavezno")]
+        public string FullName { get; set; }
+
+        [Required(ErrorMessage = "Adresa je obavezna")]
+        public string Address { get; set; }
+
+        [Required(ErrorMessage = "Email je obavezan")]
+        [EmailAddress(ErrorMessage = "Neispravan email format")]
+        public string Email { get; set; }
+
+        [Phone(ErrorMessage = "Neispravan format telefona")]
+        public string Phone { get; set; }
+
+        [Required(ErrorMessage = "Odaberite način plaćanja")]
+        public PaymentMethod PaymentMethod { get; set; }
+
+        // Podaci za karticu
+        [Required(ErrorMessage = "Broj kartice je obavezan")]
+        public string CardNumber { get; set; }
+
+        [Required(ErrorMessage = "Datum isteka je obavezan")]
+        public string ExpirationDate { get; set; }
+
+        [Required(ErrorMessage = "CVV je obavezan")]
+        public string CVV { get; set; }
+
+        public List<OrderItemDto> Items { get; set; } = new();
+        public decimal Total { get; set; }
+    }
+
+    public class OrderItemDto
+    {
+        public int ProductId { get; set; }
+        public string ProductName { get; set; }
+        public int Quantity { get; set; }
+        public decimal Price { get; set; }
+    }
 }
+

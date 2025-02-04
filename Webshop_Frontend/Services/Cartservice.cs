@@ -44,6 +44,10 @@ namespace Webshop_Frontend.Services
                 await SaveCart();
             }
         }
+        public void ClearCart()
+        {
+            Items.Clear();
+        }
 
         public async Task UpdateQuantity(int productId, int newQuantity)
         {
