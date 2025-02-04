@@ -1,3 +1,4 @@
+/* ===================== GLOBALNI STILOVI ===================== */
 html, body {
     font-family: 'Varela Round', sans-serif;
     margin: 0;
@@ -6,15 +7,15 @@ html, body {
     height: 100%;
 }
 
-/* NAVIGACIJA - PERFEKTNO PORAVNATA */
+/* ===================== NAVIGACIJA ===================== */
 .navbar {
     background: #4B5320 !important;
-    height: 80px; /* Precizna visina */
+    height: 80px;
     box-shadow: 0 4px 12px rgba(0,0,0,0.25);
-    padding: 0 2rem; /* Razmak lijevo i desno */
+    padding: 0 2rem;
     display: flex;
-    justify-content: space-between; /* Razmak između lijeve i desne grupe */
-    align-items: center; /* Centriranje elemenata vertikalno unutar navigacije */
+    justify-content: space-between;
+    align-items: center;
 }
 
 .navbar-brand {
@@ -24,7 +25,7 @@ html, body {
     letter-spacing: 1.5px;
     display: flex;
     align-items: center;
-    height: 80px; /* Održava visinu logotipa unutar navigacije */
+    height: 80px;
     padding: 0 !important;
     margin: 0;
 }
@@ -38,33 +39,31 @@ html, body {
     margin: 0;
     padding: 0;
     display: flex;
-    align-items: center;
-    align-items: stretch; /* Omogućava vertikalno istezanje stavaka prema visini navigacijskog bara */
+    align-items: stretch;
 }
 
 .left-nav-group {
     display: flex;
     align-items: center;
-    height: 80px; /* Mora odgovarati visini navigacije */
-    margin-right: auto; /* Gura grupu skroz ulijevo */
+    height: 80px;
+    margin-right: auto;
 }
 
-/* DESNA STRANA */
 .right-nav-group {
-    display: flex; /* Fleksibilni kontejner za desnu stranu */
-    align-items: center; /* Vertikalno centriranje elemenata */
-    justify-content: flex-end; /* Sadržaj se poravnava krajnje desno */
-    height: 80px; /* Mora odgovarati visini navigacije */
-    margin-left: auto; /* Osigurava da bude skroz desno */
-    gap: 1rem; /* Razmak između elemenata unutar grupe */
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    height: 80px;
+    margin-left: auto;
+    gap: 1rem;
 }
 
 .nav-item {
-    display: flex; /* Fleksibilni kontejner za svaki pojedini item */
-    align-items: center; /* Vertikalno centriranje */
-    justify-content: center; /* Horizontalno centriranje */
-    height: 100%; /* Puna visina stavke */
-    list-style: none; /* Bez oznaka */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    list-style: none;
     margin: 0;
     padding: 0;
 }
@@ -72,16 +71,16 @@ html, body {
 .nav-link {
     color: rgba(255,255,255,0.9) !important;
     font-size: 1.3rem !important;
-    display: flex !important; /* Fleksibilnost za sav sadržaj linka */
-    align-items: center; /* Centriranje teksta i ikona unutar linka */
-    justify-content: center; /* Horizontalno centriranje */
-    padding: 0 1.8rem !important; /* Horizontalni razmak unutar linkova */
-    height: calc(100% - 0.5rem); /* Puna visina linka unutar navigacije s laganim razmakom */
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    padding: 0 1.8rem !important;
+    height: calc(100% - 0.5rem);
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     text-decoration: none !important;
 }
 
-/* HOVER EFEKTI */
+/* ===================== HOVER EFEKTI ===================== */
 .nav-link:hover {
     background: rgba(0,0,0,0.15);
     transform: translateY(-2px);
@@ -92,35 +91,47 @@ html, body {
     box-shadow: inset 0 4px 8px rgba(0,0,0,0.1);
 }
 
-/* Shopping Cart Icon Styling */
+/* ===================== IKONE ===================== */
 .nav-link i {
     font-size: 3rem;
     color: white;
     transition: color 0.3s ease-in-out;
     position: absolute;
-    display: flex; /* Ensures flexibility for centering */
-    align-items: center; /* Align icon to the center vertically */
+    display: flex;
+    align-items: center;
     justify-content: center;
-    top: -2rem; 
+    top: -2rem;
 }
 
-
-
-/* Badge for cart item count */
 .nav-link i .badge {
     position: absolute;
-    top: -8px; /* Precizno pozicioniranje iznad ikone */
-    right: -8px; /* Desno pozicioniranje za bedž */
+    top: -8px;
+    right: -8px;
     background-color: #FF0000;
     color: white;
-    border-radius: 50%; /* Bedž je kružni */
+    border-radius: 50%;
     font-size: 0.8rem;
-    padding: 4px 8px; /* Razmak unutar bedža */
+    padding: 4px 8px;
     font-weight: bold;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25); /* Dodaj sjenu */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25);
 }
 
-/* GLAVNI SADRŽAJ */
+/* ===================== SPECIFIČNE IKONE ===================== */
+.cart-icon {
+    font-size: 1.8rem !important;
+    color: white !important;
+    position: relative !important;
+    top: -1rem !important;
+}
+
+.user-icon {
+    font-size: 1.8rem !important;
+    color: white !important;
+    position: relative;
+    top: 6rem;
+}
+
+/* ===================== GLAVNI SADRŽAJ ===================== */
 .main-content {
     padding-top: 100px;
     min-height: calc(100vh - 100px);
@@ -129,7 +140,7 @@ html, body {
     padding: 2rem;
 }
 
-/* FORME */
+/* ===================== FORME ===================== */
 .card {
     border: none;
     border-radius: 15px;
@@ -144,7 +155,7 @@ html, body {
     border-radius: 8px;
 }
 
-/* GUMBI */
+/* ===================== GUMBI ===================== */
 .btn {
     font-size: 1.3rem;
     padding: 1rem 2.5rem;
@@ -169,12 +180,11 @@ html, body {
     transform: scale(0.95);
 }
 
-/* RESPONSIVNOST */
+/* ===================== RESPONZIVNOST ===================== */
 @media (max-width: 1200px) {
     .navbar {
         padding: 0 1rem;
     }
-
     .nav-link {
         font-size: 1.2rem !important;
         padding: 0 1.2rem !important;
@@ -188,11 +198,9 @@ html, body {
         margin-top: 1rem;
         border-radius: 15px;
     }
-
     .nav-item {
         height: auto;
     }
-
     .nav-link {
         height: 50px;
     }
@@ -203,18 +211,18 @@ html, body {
         font-size: 1.8rem !important;
         padding: 0 1rem !important;
     }
-
     .main-content {
         padding: 1.5rem;
     }
+    .hero-title {
+        font-size: 2.5rem;
+    }
+    .hero-subtitle {
+        font-size: 1.2rem;
+    }
 }
 
-/* SAKRIJ ERROR */
-#blazor-error-ui {
-    display: none !important;
-}
-
-/* ANIMACIJE */
+/* ===================== ANIMACIJE ===================== */
 @keyframes navItemEnter {
     from { transform: translateY(10px); opacity: 0; }
     to { transform: translateY(0); opacity: 1; }
@@ -224,7 +232,47 @@ html, body {
     animation: navItemEnter 0.4s ease-out forwards;
 }
 
-/* Stil za dropdown filter */
+@keyframes jumpToCart {
+    0% { transform: translateY(0) scale(1); opacity: 1; }
+    50% { transform: translateY(-50px) scale(0.8); opacity: 0.7; }
+    100% { transform: translateY(-100px) translateX(100px) scale(0.5); opacity: 0; }
+}
+
+.animate-to-cart {
+    animation: jumpToCart 0.8s ease forwards;
+    position: relative;
+    z-index: 1000;
+}
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.animate__fadeInUp {
+    animation: fadeInUp 0.8s ease-out;
+}
+
+@keyframes zoomIn {
+    from { transform: scale(0.95); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+.animate__zoomIn {
+    animation: zoomIn 0.6s ease-out;
+}
+
+@keyframes bump {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+    100% { transform: scale(1); }
+}
+
+.cart-counter-bump {
+    animation: bump 0.3s ease;
+}
+
+/* ===================== FILTERI ===================== */
 .category-filter {
     max-width: 250px;
     position: relative;
@@ -244,11 +292,13 @@ html, body {
     box-shadow: 0 0 0 0.25rem rgba(75,83,32,0.25);
 }
 
-/* Podešavanja za prikaz proizvoda */
+/* ===================== PROIZVODI ===================== */
 .product-image {
     height: 200px;
     object-fit: cover;
     border-radius: 15px 15px 0 0;
+    transition: all 0.5s ease;
+    cursor: pointer;
 }
 
 .card {
@@ -259,7 +309,7 @@ html, body {
     transform: translateY(-5px);
 }
 
-/* Hero sekcija */
+/* ===================== HERO SEKCIJA ===================== */
 .hero-section {
     background: linear-gradient(rgba(75,83,32,0.8), rgba(75,83,32,0.8)),
     url('https://images.unsplash.com/photo-1556742205-e10cac6c51f9?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
@@ -292,7 +342,7 @@ html, body {
     transition: all 0.3s ease;
 }
 
-/* Kategorije */
+/* ===================== KATEGORIJE ===================== */
 .featured-categories {
     padding: 4rem 0;
 }
@@ -321,90 +371,24 @@ html, body {
     color: #4B5320;
 }
 
-/* Animacije */
-@keyframes fadeInUp {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-.animate__fadeInUp {
-    animation: fadeInUp 0.8s ease-out;
-}
-
-@keyframes zoomIn {
-    from { transform: scale(0.95); opacity: 0; }
-    to { transform: scale(1); opacity: 1; }
-}
-
-.animate__zoomIn {
-    animation: zoomIn 0.6s ease-out;
-}
-
-@media (max-width: 768px) {
-    .hero-title {
-        font-size: 2.5rem;
-    }
-
-    .hero-subtitle {
-        font-size: 1.2rem;
-    }
-}
-
-@keyframes jumpToCart {
-    0% { transform: translateY(0) scale(1); opacity: 1; }
-    50% { transform: translateY(-50px) scale(0.8); opacity: 0.7; }
-    100% { transform: translateY(-100px) translateX(100px) scale(0.5); opacity: 0; }
-}
-
-.product-image {
-    transition: all 0.5s ease;
-    cursor: pointer;
-}
-
-.animate-to-cart {
-    animation: jumpToCart 0.8s ease forwards;
-    position: relative;
-    z-index: 1000;
-}
-
-.cart-counter-bump {
-    animation: bump 0.3s ease;
-}
-
-@keyframes bump {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.2); }
-    100% { transform: scale(1); }
-}
-/* Dropdown links styling (global za sva dropdown-item) */
+/* ===================== DROPDOWN ===================== */
 .dropdown-item {
-    color: #333 !important; /* Tamnosivi tekst za bolju vidljivost */
-    background-color: transparent !important; /* Ukloni pozadinu */
-    transition: background-color 0.2s, color 0.2s; /* Glatki prijelaz efekata */
+    color: #333 !important;
+    background-color: transparent !important;
+    transition: background-color 0.2s, color 0.2s;
 }
 
 .dropdown-item:hover {
-    color: #000 !important; /* Crni tekst na hover */
-    background-color: #f8f9fa !important; /* Svijetlosiva pozadina na hover */
+    color: #000 !important;
+    background-color: #f8f9fa !important;
 }
 
-/* Specifično za .dropdown-item unutar našeg menija */
 .dropdown-menu .dropdown-item {
-    font-weight: 500; /* Malo boldiran tekst za jasniji prikaz */
-    font-size: 0.9rem; /* Malo manji font za čist dizajn (po želji) */
-}
-/* Prilagodba za Shopping Cart ikonicu */
-.cart-icon {
-    font-size: 1.8rem !important; /* Veličina ikone */
-    color: white !important; /* Boja */
-    position: relative !important; /* Omogućuje prilagodbu pozicije */
-    top: -1rem !important; /* Podigni cart ikonicu */
+    font-weight: 500;
+    font-size: 0.9rem;
 }
 
-/* Prilagodba za User ikonu */
-.user-icon {
-    font-size: 1.8rem !important; /* Veličina ikone */
-    color: white; /* Boja */
-    position: relative; /* Omogućuje prilagodbu pozicije */
-    top: 6rem; /* Spusti user ikonicu */
+/* ===================== BLAGAJNA ===================== */
+#blazor-error-ui {
+    display: none !important;
 }
