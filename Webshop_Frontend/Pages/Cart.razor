@@ -16,7 +16,10 @@
 
     @if (CartService.Items.Count == 0)
     {
-        <p class="text-center">Vaša košarica je prazna.</p>
+        <div class="text-center">
+            <p class="text-center">Vaša košarica je prazna.</p>
+            <button class="btn btn-success btn-lg mt-3" @onclick="NavigateToProducts">Dodaj proizvode</button>
+        </div>
     }
     else
     {
@@ -69,7 +72,7 @@
             @if (isLoggedIn)
             {
                 <!-- Gumb za prijavljene korisnike -->
-                <button class="btn btn-primary btn-lg me-3" @onclick="NavigateToCheckout">Nastavi na plaćanje</button>
+                <button class="btn btn-success btn-lg me-3" @onclick="NavigateToCheckout">Nastavi na plaćanje</button>
             }
             else
             {
@@ -162,6 +165,18 @@
         pointer-events: none; /* Onemogućuje interakcije */
         cursor: not-allowed;
     }
+
+    /* Dugmad (zelena boja) */
+    .btn-success {
+        background-color: #198754;
+        border-color: #198754;
+        color: #fff;
+    }
+
+    .btn-success:hover {
+        background-color: #157347;
+        border-color: #146c43;
+    }
 </style>
 
 @code {
@@ -190,6 +205,12 @@
     private void NavigateToCheckout()
     {
         Navigation.NavigateTo("/cart/checkout");
+    }
+
+    private void NavigateToProducts()
+    {
+        // Preusmjeri na stranicu proizvoda
+        Navigation.NavigateTo("/products");
     }
 
     private void NavigateToLogin()

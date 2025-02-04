@@ -1,159 +1,184 @@
 @page "/cart/checkout"
+@using System.ComponentModel.DataAnnotations
 @using Webshop_Frontend.Models
-@using Webshop_Frontend.Services
-@inject CartService CartService
 @inject HttpClient Http
 @inject NavigationManager Navigation
-@inject AuthService AuthService
+@inject CartService CartService
 
-<h3>Završetak kupnje</h3>
+<h3 class="text-center mb-4">Završetak kupnje</h3>
 
 @if (CartService.Items.Count == 0)
 {
-    <div class="alert alert-warning">
-        Košarica je prazna
+    <div class="alert alert-warning text-center">
+        Košarica je prazna.
         <button @onclick="NavigateToProducts" class="btn btn-primary mt-3">Povratak na proizvode</button>
     </div>
 }
 else
 {
-    <EditForm Model="@orderDto" OnValidSubmit="@PlaceOrder">
-        <DataAnnotationsValidator />
-        <ValidationSummary />
+    <div class="checkout-form-container">
+        <EditForm Model="@orderDto" OnValidSubmit="@PlaceOrder">
+            <DataAnnotationsValidator />
 
-        <!-- Podaci korisnika -->
-        <div class="form-group mb-3">
-            <label>Ime i prezime:</label>
-            <InputText @bind-Value="orderDto.FullName" class="form-control" />
-            <ValidationMessage For="@(() => orderDto.FullName)" />
-        </div>
-
-        <div class="form-group mb-3">
-            <label>Adresa dostave:</label>
-            <InputText @bind-Value="orderDto.Address" class="form-control" />
-            <ValidationMessage For="@(() => orderDto.Address)" />
-        </div>
-
-        <div class="form-group mb-3">
-            <label>Email:</label>
-            <InputText @bind-Value="orderDto.Email" class="form-control" />
-            <ValidationMessage For="@(() => orderDto.Email)" />
-        </div>
-
-        <div class="form-group mb-3">
-            <label>Telefon (opcionalno):</label>
-            <InputText @bind-Value="orderDto.Phone" class="form-control" />
-            <ValidationMessage For="@(() => orderDto.Phone)" />
-        </div>
-
-        <!-- Način plaćanja -->
-        <div class="form-group mb-4">
-            <label>Način plaćanja:</label>
-            <InputSelect @bind-Value="orderDto.PaymentMethod" class="form-select">
-                @foreach (PaymentMethod method in Enum.GetValues(typeof(PaymentMethod)))
-                {
-                    <option value="@method">@method</option>
-                }
-            </InputSelect>
-            <ValidationMessage For="@(() => orderDto.PaymentMethod)" />
-        </div>
-
-        <!-- Dinamički podaci za način plaćanja -->
-        @if (orderDto.PaymentMethod == PaymentMethod.Kartica)
-        {
-            <div class="card p-3 mb-3 shadow-sm" style="max-width: 400px; margin: 0 auto;">
-                <h5 class="text-center">Detalji plaćanja karticom</h5>
-                <div class="form-group mb-3">
-                    <label>Broj kartice:</label>
-                    <InputText @bind-Value="orderDto.CardNumber" class="form-control" placeholder="1234 5678 9012 3456" />
-                    <ValidationMessage For="@(() => orderDto.CardNumber)" />
-                </div>
-
-                <div class="form-group mb-3">
-                    <label>Datum isteka (MM/YY):</label>
-                    <InputText @bind-Value="orderDto.ExpirationDate" class="form-control" placeholder="MM/YY" />
-                    <ValidationMessage For="@(() => orderDto.ExpirationDate)" />
-                </div>
-
-                <div class="form-group mb-3">
-                    <label>CVV:</label>
-                    <InputText @bind-Value="orderDto.CVV" class="form-control" placeholder="123" type="password" />
-                    <ValidationMessage For="@(() => orderDto.CVV)" />
-                </div>
+            <!-- Podaci korisnika -->
+            <div class="form-group mb-3">
+                <label>Ime i prezime:</label>
+                <InputText @bind-Value="orderDto.FullName" class="form-control" />
+                <ValidationMessage For="@(() => orderDto.FullName)" class="custom-validation-message" />
             </div>
-        }
-        else if (orderDto.PaymentMethod == PaymentMethod.PayPal)
-        {
-            <div class="card p-3 mb-3 shadow-sm" style="max-width: 400px; margin: 0 auto; text-align: center;">
-                <h5 class="mb-3">Prijava na PayPal</h5>
-                <div>
-                    <img src="https://www.paypalobjects.com/webstatic/mktg/Logo/pp-logo-100px.png" alt="PayPal" style="height: 50px;" />
-                    <br />
-                    <button
-                        class="btn mt-3"
-                        style="background-color: #0070ba; color: white; border: none; padding: 8px 12px; font-size: 14px; border-radius: 4px;"
-                        @onclick="RedirectToPayPal"
-                    >
-                        Prijavi se na PayPal
-                    </button>
-                </div>
+
+            <div class="form-group mb-3">
+                <label>Adresa:</label>
+                <InputText @bind-Value="orderDto.Address" class="form-control" />
+                <ValidationMessage For="@(() => orderDto.Address)" class="custom-validation-message" />
             </div>
+
+            <div class="form-group mb-3">
+                <label>Email:</label>
+                <InputText @bind-Value="orderDto.Email" class="form-control" />
+                <ValidationMessage For="@(() => orderDto.Email)" class="custom-validation-message" />
+            </div>
+
+            <div class="form-group mb-3">
+                <label>Telefon (opcionalno):</label>
+                <InputText @bind-Value="orderDto.Phone" class="form-control" />
+                <ValidationMessage For="@(() => orderDto.Phone)" class="custom-validation-message" />
+            </div>
+
+            <!-- Način plaćanja -->
+            <div class="form-group mb-4">
+                <label>Način plaćanja:</label>
+                <InputSelect @bind-Value="orderDto.PaymentMethod" class="form-select">
+                    @foreach (PaymentMethod method in Enum.GetValues(typeof(PaymentMethod)))
+                    {
+                        if (method == PaymentMethod.Gotovina)
+                        {
+                            <option value="@method">Plaćanje pouzećem</option>
+                        }
+                        else
+                        {
+                            <option value="@method">@method</option>
+                        }
+                    }
+                </InputSelect>
+                <ValidationMessage For="@(() => orderDto.PaymentMethod)" class="custom-validation-message" />
+            </div>
+
+            <!-- Polja za kartično plaćanje -->
+            @if (orderDto.PaymentMethod == PaymentMethod.Kartica)
+            {
+                <div class="card p-3 mb-3 shadow-sm">
+                    <h5 class="text-center">Detalji plaćanja karticom</h5>
+
+                    <div class="form-group mb-3">
+                        <label>Broj kartice:</label>
+                        <InputText @bind-Value="cardNumber" class="form-control"
+                                   placeholder="1234 5678 9012 3456"
+                                   oninput="FormatCardNumber(event)" />
+                        <ValidationMessage For="@(() => cardNumber)" class="custom-validation-message" />
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label>Datum isteka (MM/YY):</label>
+                        <InputText @bind-Value="expirationDate" class="form-control"
+                                   placeholder="MM/YY"
+                                   oninput="FormatExpirationDate(event)" />
+                        <ValidationMessage For="@(() => expirationDate)" class="custom-validation-message" />
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label>CVV:</label>
+                        <InputText @bind-Value="cvv" class="form-control"
+                                   placeholder="123"
+                                   maxlength="3"
+                                   oninput="FormatCVV(event)" />
+                        <ValidationMessage For="@(() => cvv)" class="custom-validation-message" />
+                    </div>
+                </div>
+            }
+
+            <!-- Dugme za potvrdu narudžbe -->
+            <button type="submit" class="btn btn-success w-100 mt-3">
+                <i class="bi bi-check-circle"></i> Završi narudžbu
+            </button>
+        </EditForm>
+    </div>
+
+    <!-- Lokalni stilovi forme -->
+    <style>
+        .checkout-form-container {
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background-color: #f9f9f9;
+            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
         }
 
-        <!-- Dugme za potvrdu narudžbe -->
-        <button type="submit" class="btn btn-success w-100 mt-3">
-            <i class="bi bi-check-circle"></i> Završi narudžbu
-        </button>
-    </EditForm>
+        .custom-validation-message {
+            color: #ff0000;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-top: 0.25rem;
+        }
+    </style>
+
+    <script>
+        // Formatiranje broja kartice (razmak nakon svake 4 znamenke)
+        function FormatCardNumber(e) {
+            let input = e.target;
+            let value = input.value.replace(/\D/g, ''); // Dozvoljava samo brojke
+            if (value.length > 16) {
+                value = value.substring(0, 16);
+            }
+            let formattedValue = value.match(/.{1,4}/g)?.join(' ') || value;
+            input.value = formattedValue;
+        }
+
+        // Formatiranje datuma isteka (MM/YY)
+        function FormatExpirationDate(e) {
+            let input = e.target;
+            let value = input.value.replace(/\D/g, '');
+            if (value.length <= 2) {
+                input.value = value;
+            } else {
+                input.value = value.substring(0, 2) + '/' + value.substring(2, 4);
+            }
+        }
+
+        // Formatiranje CVV (maksimalno 3 brojke)
+        function FormatCVV(e) {
+            let input = e.target;
+            let value = input.value.replace(/\D/g, ''); // Dozvoljava samo brojke
+            if (value.length > 3) {
+                value = value.substring(0, 3); // Ograničenje na 3 cifre
+            }
+            input.value = value;
+        }
+    </script>
 }
 
 @code {
     private OrderDto orderDto = new();
-
-    protected override void OnInitialized()
-    {
-        // Ako je korisnik prijavljen, popuni njegovo ime i email u formi
-        if (AuthService.CurrentUser != null)
-        {
-            orderDto.FullName = AuthService.CurrentUser.FullName;
-            orderDto.Email = AuthService.CurrentUser.Email;
-        }
-
-        // Ako je korpa prazna, preusmeri na stranicu proizvoda
-        if (CartService.Items.Count == 0)
-        {
-            NavigateToProducts();
-        }
-    }
+    private string cardNumber;
+    private string expirationDate;
+    private string cvv;
 
     private async Task PlaceOrder()
     {
         try
         {
-            // Dodaj stavke iz korpe u DTO pre slanja na backend
-            orderDto.Items = CartService.Items.Select(i => new OrderItemDto
-            {
-                ProductId = i.Product.Id,
-                ProductName = i.Product.Name,
-                Quantity = i.Quantity,
-                Price = i.Product.Price
-            }).ToList();
-            orderDto.Total = CartService.GetTotal(); // Ukupna cena
-
-            // Pošalji narudžbu na backend, koristeći odgovarajući način plaćanja
             var response = await Http.PostAsJsonAsync("api/orders", orderDto);
-
             if (response.IsSuccessStatusCode)
             {
-                // Preusmeri na potvrdu narudžbe
                 var orderId = await response.Content.ReadFromJsonAsync<int>();
-                CartService.ClearCart();
                 Navigation.NavigateTo($"/order-confirmation/{orderId}");
             }
         }
-        catch (Exception ex)
+        catch (Exception e)
         {
-            Console.WriteLine($"Greška pri kreiranju narudžbe: {ex.Message}");
+            Console.WriteLine($"Greška: {e.Message}");
         }
     }
 
@@ -161,50 +186,4 @@ else
     {
         Navigation.NavigateTo("/products");
     }
-
-    private void RedirectToPayPal()
-    {
-        Navigation.NavigateTo("https://www.paypal.com", true);
-    }
-
-    public class OrderDto
-    {
-        [Required(ErrorMessage = "Ime i prezime je obavezno")]
-        public string FullName { get; set; }
-
-        [Required(ErrorMessage = "Adresa je obavezna")]
-        public string Address { get; set; }
-
-        [Required(ErrorMessage = "Email je obavezan")]
-        [EmailAddress(ErrorMessage = "Neispravan email format")]
-        public string Email { get; set; }
-
-        [Phone(ErrorMessage = "Neispravan format telefona")]
-        public string Phone { get; set; }
-
-        [Required(ErrorMessage = "Odaberite način plaćanja")]
-        public PaymentMethod PaymentMethod { get; set; }
-
-        // Podaci za karticu
-        [Required(ErrorMessage = "Broj kartice je obavezan")]
-        public string CardNumber { get; set; }
-
-        [Required(ErrorMessage = "Datum isteka je obavezan")]
-        public string ExpirationDate { get; set; }
-
-        [Required(ErrorMessage = "CVV je obavezan")]
-        public string CVV { get; set; }
-
-        public List<OrderItemDto> Items { get; set; } = new();
-        public decimal Total { get; set; }
-    }
-
-    public class OrderItemDto
-    {
-        public int ProductId { get; set; }
-        public string ProductName { get; set; }
-        public int Quantity { get; set; }
-        public decimal Price { get; set; }
-    }
 }
-
