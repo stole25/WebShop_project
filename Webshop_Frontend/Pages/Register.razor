@@ -13,23 +13,41 @@
                     <EditForm Model="@registerModel" OnValidSubmit="HandleRegister">
                         <DataAnnotationsValidator />
 
+                        <!-- Unos email-a -->
                         <div class="mb-3">
                             <label class="form-label">Email</label>
                             <InputText class="form-control" @bind-Value="registerModel.Email" />
                             <ValidationMessage For="@(() => registerModel.Email)" class="text-danger" />
                         </div>
 
+                        <!-- Unos lozinke -->
                         <div class="mb-3">
                             <label class="form-label">Lozinka</label>
-                            <InputText type="password" class="form-control" @bind-Value="registerModel.Password" />
+                            <input type="password"
+                                   class="form-control"
+                                   value="@registerModel.Password"
+                                   @oninput="(e) => OnPasswordInput(e)" />
+
+                            <!-- Traka za snagu lozinke -->
+                            <div class="progress mt-2">
+                                <div class="progress-bar"
+                                     role="progressbar"
+                                     style="width: @PasswordStrength%; background-color: @PasswordStrengthColor;">
+                                    @PasswordStrengthLabel
+                                </div>
+                            </div>
+
+                            <!-- Poruka validacije za lozinku -->
                             <ValidationMessage For="@(() => registerModel.Password)" class="text-danger" />
                         </div>
 
+                        <!-- Poruka o grešci ako postoji -->
                         @if (!string.IsNullOrEmpty(errorMessage))
                         {
                             <div class="alert alert-danger">@errorMessage</div>
                         }
 
+                        <!-- Dugme za registraciju -->
                         <button type="submit" class="btn btn-primary w-100">Registriraj se</button>
                     </EditForm>
                 </div>
@@ -39,9 +57,16 @@
 </div>
 
 @code {
+    // Model za unos podataka za registraciju
     private UserRegistrationDto registerModel = new();
     private string errorMessage;
 
+    // Snaga lozinke
+    private int PasswordStrength { get; set; } = 0; // Snaga kao broj (0-100)
+    private string PasswordStrengthColor { get; set; } = "red"; // Boja trake
+    private string PasswordStrengthLabel { get; set; } = "Slaba"; // Tekstualna oznaka
+
+    // Obrada registracije
     private async Task HandleRegister()
     {
         errorMessage = string.Empty;
@@ -53,6 +78,63 @@
         catch (Exception ex)
         {
             errorMessage = ex.Message;
+        }
+    }
+
+    // Funkcija za praćenje unosa lozinke i snage
+    private void OnPasswordInput(ChangeEventArgs e)
+    {
+        if (e.Value is not string password)
+        {
+            PasswordStrength = 0;
+            PasswordStrengthLabel = "Slaba";
+            PasswordStrengthColor = "red";
+            return;
+        }
+
+        registerModel.Password = password; // Postavi vrednost u model
+
+        EvaluatePasswordStrength(password); // Proceni snagu lozinke
+    }
+
+    // Procena snage lozinke
+    private void EvaluatePasswordStrength(string password)
+    {
+        if (string.IsNullOrEmpty(password))
+        {
+            PasswordStrength = 0;
+            PasswordStrengthLabel = "Slaba";
+            PasswordStrengthColor = "red";
+            return;
+        }
+
+        // Logika za procenu
+        int strength = 0;
+
+        if (password.Length >= 6) strength += 25; // Dužina
+        if (password.Any(char.IsUpper)) strength += 25; // Velika slova
+        if (password.Any(char.IsLower)) strength += 25; // Mala slova
+        if (password.Any(char.IsDigit)) strength += 15; // Brojevi
+        if (password.Any(ch => "!@#$%^&*()_+-=".Contains(ch))) strength += 35; // Specijalni simboli
+        if (strength > 100) strength = 100; // Maksimum
+
+        PasswordStrength = strength;
+
+        // Postavljanje oznake i boje
+        if (strength < 50)
+        {
+            PasswordStrengthLabel = "Slaba";
+            PasswordStrengthColor = "red";
+        }
+        else if (strength < 75)
+        {
+            PasswordStrengthLabel = "Srednja";
+            PasswordStrengthColor = "orange";
+        }
+        else
+        {
+            PasswordStrengthLabel = "Jaka";
+            PasswordStrengthColor = "green";
         }
     }
 }
