@@ -64,6 +64,22 @@ else
                 <ValidationMessage For="@(() => orderDto.PaymentMethod)" class="custom-validation-message" />
             </div>
 
+            <!-- PayPal opcija -->
+            @if (orderDto.PaymentMethod == PaymentMethod.PayPal)
+            {
+                <div class="paypal-container text-center">
+                    <!-- PayPal ikonica -->
+                    <img src="https://www.paypalobjects.com/webstatic/mktg/logo/pp_cc_mark_111x69.jpg" 
+                         alt="PayPal" 
+                         style="margin-top: 10px;" />
+
+                    <!-- PayPal gumb -->
+                    <button class="paypal-button" @onclick="RedirectToPayPal">
+                        Idi na PayPal
+                    </button>
+                </div>
+            }
+
             <!-- Polja za kartično plaćanje -->
             @if (orderDto.PaymentMethod == PaymentMethod.Kartica)
             {
@@ -121,6 +137,21 @@ else
             font-size: 0.9rem;
             font-weight: 600;
             margin-top: 0.25rem;
+        }
+
+        .paypal-button {
+            background: #0070BA; /* PayPal plava boja */
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .paypal-button:hover {
+            background: #005EA6; /* Tamnija PayPal boja na hover */
         }
     </style>
 
@@ -185,5 +216,10 @@ else
     private void NavigateToProducts()
     {
         Navigation.NavigateTo("/products");
+    }
+
+    private void RedirectToPayPal()
+    {
+        Navigation.NavigateTo("https://www.paypal.com/login", true);
     }
 }
